@@ -50,10 +50,11 @@
     - Указание ссылки (не обязательно) `RECORD_CREATE_SET_LINK`
 -  `recordEdit` - Редактирование записи
     - Редактирование заголовка `RECORD_EDIT_SET_TITLE`
-    - Редактирование описания (не обязательно)  `RECORD_EDIT_SET_DESCRIPTIOn`
+    - Редактирование описания (не обязательно)  `RECORD_EDIT_SET_DESCRIPTION`
     - Редактирование типа `RECORD_EDIT_SET_TYPE`
     - Редактирование тегов (не обязательно) `RECORD_EDIT_SET_TAGS`
     - Редактирование ссылки (не обязательно) `RECORD_EDIT_SET_LINK`
+    `recordRemove` - Удаление записи `RECORD_REMOVE`
 -  `tagList` - Список тегов 
     - Удаление тега `TAG_DELETE`
     - Переименование тега `TAG_RENAME`
