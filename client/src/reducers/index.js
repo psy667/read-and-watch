@@ -1,57 +1,28 @@
 import { combineReducers } from "redux";
-import * as actions from "../actions";
-import axios from "axios";
+import * as actions from "../actions/actionTypes";
 
-// const test = handleActions(
-//   {
-//     [actions.increment](
-//       state,
-//       {
-//         payload: { task }
-//       }
-//     ) {
-//       const { value } = state;
-//       return {
-//         ...state,
-//         value: value + 1
-//       };
-//     },
-//     [actions.testRequest](state) {
-//       return state;
-//     },
-//     [actions.testFailure](state) {
-//       return state;
-//     },
-//     [actions.testSuccess](
-//       state,
-//       {
-//         payload: { data }
-//       }
-//     ) {
-//       console.log(data);
-//       const { items } = state;
-//       return {
-//         ...state,
-//         items: data
-//       };
-//     }
-//   },
-//   { value: 0, items: [] }
-// );
-
-const initialState = {};
+const initialState = {
+    records: [
+        {
+            id: 0,
+            title: "Заводной апельсин",
+            description: "",
+            type: "book",
+            date: 1567192310125,
+            status: "complete",
+            tags: [],
+            link: "",
+        },
+    ],
+};
 
 const test = (state = initialState, action) => {
-  switch (action.type) {
-    case "ACTION":
-      break;
-
+    switch (action.type) {
     default:
-      return {};
-      break;
-  }
+        return state;
+    }
 };
 
 export default combineReducers({
-  test
+    test,
 });
