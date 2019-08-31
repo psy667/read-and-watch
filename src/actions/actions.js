@@ -1,6 +1,7 @@
 import {
     RECORDS_LIST_FILTER,
     RECORDS_LIST_SORT,
+    RECORDS_LIST_SET_STATUS,
     RECORD_CREATE_SET_TITLE,
     RECORD_CREATE_SET_DESCRIPTION,
     RECORD_CREATE_SET_TYPE,
@@ -17,3 +18,10 @@ import {
     TAG_SET_NAME,
 } from "./actionTypes";
 
+export const toggleStatusAction = (id, currentStatus) => ({
+    type: RECORDS_LIST_SET_STATUS,
+    payload: {
+        id,
+        currentStatus
+    }
+});

@@ -1,11 +1,13 @@
 import React from "react";
+import { RecordsListContainer } from "../../containers/RecordsList/container";
 
-function Home() {
+function Main() {
     return (
         <div>
-      Home
+          q
+          <RecordsListContainer></RecordsListContainer>
         </div>
     );
 }
 
-export default Home;
+export default Main;
