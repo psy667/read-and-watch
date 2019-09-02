@@ -1,6 +1,6 @@
 import React from "react";
 
-import {connect} from "react-redux";
+import { connect } from "react-redux";
 
 import "./styles.scss";
 
@@ -12,4 +12,4 @@ const mapStateToProps = (store) => ({
     state: store,
 });
 
-export const EntityContainer = (mapStateToProps)(Entity);
+export const EntityContainer = connect(mapStateToProps)(Entity);

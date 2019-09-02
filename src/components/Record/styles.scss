@@ -1,0 +1,39 @@
+
+
+.record{
+    margin-bottom: 8px;
+    .ant-card-body{
+        padding: 16px;
+    }
+    .header{
+        justify-content: space-between;
+        display: flex;
+        height: 24px;
+        .button-wrapper{
+            button{
+                margin-left: 8px;
+            }
+        }
+    }
+    h4{
+        margin: 0;
+    }
+    .tags{
+        overflow: scroll;
+        padding-bottom: 8px;
+    }
+
+    .button-wrapper, .description, .tags, .date{
+        display: none;
+    }
+    
+    &.full-info{
+        .button-wrapper, .description, .date{
+            display: block;
+        }
+        .tags{
+            display: flex;
+        }
+    }
+}
+

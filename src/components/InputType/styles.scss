@@ -1,0 +1,14 @@
+.input-type{
+    .ant-radio-group{
+        display: flex;
+        .ant-radio-button-wrapper{
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            span{
+                display: block;
+                align-self: center;
+            }
+        }
+    }
+}
