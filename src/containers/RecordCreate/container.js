@@ -3,7 +3,11 @@ import React from "react";
 import { connect } from "react-redux";
 import { Button } from "antd";
 import {
-    createRecordAction, setValueNewRecordAction, closeFormAction, openFormAction, setNewRecordsListAction,
+    setValueNewRecordAction,
+    closeFormAction,
+    openFormAction,
+    setNewRecordsListAction,
+    setNewTagsListAction,
 } from "../../actions/actions";
 import "./styles.scss";
 
@@ -13,21 +17,33 @@ import { InputDescription } from "../../components/InputDescription/component";
 import { InputLink } from "../../components/InputLink/component";
 import { InputTags } from "../../components/InputTags/component";
 import { RecordCreateForm } from "../../components/RecordCreateForm/component";
-import { database, getRecords, addRecord } from "../../database";
+import {
+    getRecords, addRecord, addTag, getTags,
+} from "../../database";
 
 
 const RecordCreate = (props) => {
     const {
-        setValueNewRecord, createRecord, newRecord, tags, showForm, closeForm, openForm, setNewRecordsList,
+        setValueNewRecord,
+        newRecord,
+        tags,
+        showForm,
+        closeForm,
+        openForm,
+        setNewRecordsList,
+        setNewTagsList,
     } = props;
 
     const updateStore = () => {
         getRecords().then((data) => setNewRecordsList(data));
+        getTags().then((data) => setNewTagsList(data));
     };
 
     const addRecordToDB = (record) => {
+        record.tags.map((tag) => addTag({ id: tag, value: tag }));
         addRecord(record).then(() => {
             updateStore();
+            closeForm();
         });
     };
 
@@ -77,11 +93,11 @@ const mapStateToProps = (store) => ({
 });
 
 const actions = {
-    createRecord: createRecordAction,
     setValueNewRecord: setValueNewRecordAction,
     closeForm: closeFormAction,
     openForm: openFormAction,
     setNewRecordsList: setNewRecordsListAction,
+    setNewTagsList: setNewTagsListAction,
 };
 
 export const RecordCreateContainer = connect(mapStateToProps, actions)(RecordCreate);

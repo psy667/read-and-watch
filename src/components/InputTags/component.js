@@ -17,7 +17,7 @@ export const InputTags = (props) => {
     return (
         <Form.Item label="Tags">
             <Select
-                mode="multiple"
+                mode="tags"
                 style={{ width: "100%" }}
                 placeholder="Please select"
                 onChange={handleInput}
@@ -25,8 +25,8 @@ export const InputTags = (props) => {
             >
                 {
                     children.map((item) => (
-                        <Option key={item.id} value={item.id}>
-                            {item.title}
+                        <Option key={item} value={item}>
+                            {item}
                         </Option>
                     ))
                 }

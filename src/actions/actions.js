@@ -17,6 +17,7 @@ import {
     FORM_OPEN,
     RECORDS_LIST_UPDATE,
     RECORD_EDIT,
+    TAGS_LIST_UPDATE,
 } from "./actionTypes";
 
 export const toggleStatusAction = (id, currentStatus) => ({
@@ -61,5 +62,12 @@ export const editRecordAction = (record) => ({
     type: RECORD_EDIT,
     payload: {
         record,
+    },
+});
+
+export const setNewTagsListAction = (tags) => ({
+    type: TAGS_LIST_UPDATE,
+    payload: {
+        tags,
     },
 });

@@ -22,7 +22,7 @@ export const Record = (props) => {
 
     const [showFullInfo, setShowMode] = useState(false);
 
-    const getDateString = (date) => new Date(date).toLocaleDateString("ru-ru");
+    const getDateString = (isoTime) => new Date(isoTime).toLocaleDateString("ru-ru");
 
     return (
         <Card className={cx("record", { "full-info": showFullInfo })} onMouseEnter={() => setShowMode(true)} onMouseLeave={() => setShowMode(false)}>
@@ -42,7 +42,7 @@ export const Record = (props) => {
             <Text className="description">{description}</Text>
             <div className="tags">
                 {
-                    tags.map((item) => <Tag key={item.id}>{item.title}</Tag>)
+                    tags.map((item) => <Tag key={item}>{item}</Tag>)
                 }
             </div>
             <Text className="date" type="secondary">{getDateString(date)}</Text>

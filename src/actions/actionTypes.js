@@ -20,4 +20,5 @@ export const FORM_CLOSE = "FORM_CLOSE";
 export const FORM_OPEN = "FORM_OPEN";
 export const RECORDS_LIST_UPDATE = "RECORDS_LIST_UPDATE";
 export const RECORD_EDIT = "RECORD_EDIT";
+export const TAGS_LIST_UPDATE = "TAGS_LIST_UPDATE";
 // export const = "";

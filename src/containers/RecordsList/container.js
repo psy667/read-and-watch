@@ -1,20 +1,25 @@
 import React, { useEffect } from "react";
-
+import cx from "classnames";
+import { Empty } from "antd";
 import { connect } from "react-redux";
-import { getRecords, deleteRecord, updateRecord } from "../../database";
+import {
+    getRecords, deleteRecord, updateRecord, getTags,
+} from "../../database";
 import { Record } from "../../components/Record/component";
-import { toggleStatusAction, setNewRecordsListAction, editRecordAction } from "../../actions/actions";
+import {
+    toggleStatusAction, setNewRecordsListAction, editRecordAction, setNewTagsListAction,
+} from "../../actions/actions";
 import "./styles.scss";
-
-const getTagsByIds = (ids, tags) => ids.map((item) => tags.filter((tag) => tag.id === item)[0]);
 
 const RecordsList = (props) => {
     const {
-        records, tags, setNewRecordsList, editRecord,
+        records, setNewRecordsList, editRecord, setNewTagsList, showForm,
     } = props;
+
 
     const updateStore = () => {
         getRecords().then((data) => setNewRecordsList(data));
+        getTags().then((data) => setNewTagsList(data));
     };
     useEffect(updateStore, []);
 
@@ -28,7 +33,7 @@ const RecordsList = (props) => {
     };
 
     return (
-        <div className="record-list">
+        <div className={cx("record-list", { "show-form": showForm })}>
             {
                 records.map((item) => (
                     <Record
@@ -37,7 +42,7 @@ const RecordsList = (props) => {
                         description={item.description}
                         type={item.type}
                         date={item.date}
-                        tags={getTagsByIds(item.tags, tags)}
+                        tags={item.tags}
                         link={item.link}
                         status={item.status}
                         onStatusChange={() => handleToggleStatus(item.id, item)}
@@ -46,6 +51,10 @@ const RecordsList = (props) => {
                     />
                 ))
             }
+            {
+                records.length === 0
+                && <Empty />
+            }
         </div>
     );
 };
@@ -53,12 +62,14 @@ const RecordsList = (props) => {
 const mapStateToProps = (store) => ({
     records: store.records.list,
     tags: store.tags.list,
+    showForm: store.records.showForm,
 });
 
 const actions = {
     toggleStatus: toggleStatusAction,
     setNewRecordsList: setNewRecordsListAction,
     editRecord: editRecordAction,
+    setNewTagsList: setNewTagsListAction,
 };
 
 export const RecordsListContainer = connect(mapStateToProps, actions)(RecordsList);

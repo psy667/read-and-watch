@@ -21,7 +21,7 @@ export const RecordCreateForm = (props) => {
         <Drawer
             title="Add new record"
             placement="bottom"
-            height={560}
+            height={400}
             visible={visible}
             onClose={closeForm}
         >
@@ -29,7 +29,7 @@ export const RecordCreateForm = (props) => {
                 onSubmit={handleSubmit}
             >
                 {children}
-                <Button type="primary" htmlType="submit" block disabled={!newRecordData.title}>Save</Button>
+                <Button className="button-save" type="primary" htmlType="submit" block disabled={!newRecordData.title}>Save</Button>
             </Form>
         </Drawer>
     );
