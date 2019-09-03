@@ -13,15 +13,12 @@ const initialState = {
 
 };
 
-const getNewId = () => Math.round(Math.random() * 10 ** 8).toString(16);
-
 export const recordsReducer = (state = initialState, action) => {
     switch (action.type) {
     case actions.RECORDS_LIST_UPDATE: {
         const { records } = action.payload;
         return {
             ...state,
-            showForm: false,
             list: records,
         };
     }

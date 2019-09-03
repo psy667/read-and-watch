@@ -9,6 +9,11 @@ export async function database() {
                 autoIncrement: true,
             });
             store.createIndex("date", "date");
+
+            db.createObjectStore("tags", {
+                keyPath: "id",
+                autoIncrement: true,
+            });
         },
     });
     return DB;
@@ -32,5 +37,7 @@ export const addRecord = async (record) => {
     });
 };
 
+export const addTag = async (tag) => database().then((db) => db.put("tags", tag));
 
 export const getRecords = async () => database().then((db) => db.getAll("records"));
+export const getTags = async () => database().then((db) => db.getAll("tags"));
