@@ -12,8 +12,6 @@ import * as serviceWorker from "./serviceWorker";
 // console.log(db.getAllFromIndex("articles", "date"));
 // }
 
-console.log = (e) => alert(e);
-
 const store = createStore(
     reducers,
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
