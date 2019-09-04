@@ -11,7 +11,8 @@ import * as serviceWorker from "./serviceWorker";
 // Get all the articles in date order:
 // console.log(db.getAllFromIndex("articles", "date"));
 // }
-console.log = window.alert;
+
+console.log = (e) => alert(e);
 
 const store = createStore(
     reducers,
