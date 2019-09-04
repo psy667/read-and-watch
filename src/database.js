@@ -1,43 +1,56 @@
-import { openDB } from "idb";
+import { db } from "./firebase";
 
+const userId = localStorage.getItem("id") || "user";
 
-export async function database() {
-    const DB = openDB("read-and-watch", 1, {
-        upgrade(db) {
-            const store = db.createObjectStore("records", {
-                keyPath: "id",
-                autoIncrement: true,
-            });
-            store.createIndex("date", "date");
+export const deleteRecord = async (id) => db.collection("users")
+    .doc(userId)
+    .collection("records")
+    .doc(id)
+    .delete();
 
-            db.createObjectStore("tags", {
-                keyPath: "id",
-                autoIncrement: true,
-            });
-        },
-    });
-    return DB;
-}
+export const updateRecord = async (value) => db.collection("users")
+    .doc(userId)
+    .collection("records")
+    .doc(value.id)
+    .set(value);
 
-export const deleteRecord = async (key) => database().then((db) => db.delete("records", key));
-
-export const updateRecord = async (value) => database().then((db) => db.put("records", value));
 
 export const addRecord = async (record) => {
     if (record.id) {
-        return database().then((db) => db.put("records", record));
+        return db.collection("users").doc(userId).collection("records").doc(record.id)
+            .set(record);
     }
     const newRecordObject = {
         ...record,
         date: new Date().getTime(),
         status: "incomplete",
     };
-    return database().then((db) => {
-        db.add("records", newRecordObject);
-    });
+    return db.collection("users").doc(userId).collection("records").add(newRecordObject);
 };
 
-export const addTag = async (tag) => database().then((db) => db.put("tags", tag));
+export const addTag = async (tag) => db.collection("users").doc(userId).collection("tags").add(tag);
 
-export const getRecords = async () => database().then((db) => db.getAll("records"));
-export const getTags = async () => database().then((db) => db.getAll("tags"));
+export const getRecords = async () => db.collection("users")
+    .doc(userId)
+    .collection("records")
+    .get()
+    .then((response) => {
+        const recordsArray = [];
+
+        response.forEach((item) => recordsArray.push({ ...item.data(), id: item.id }));
+
+        return recordsArray;
+    });
+
+export const getTags = async () => db
+    .collection("users")
+    .doc(userId)
+    .collection("tags")
+    .get()
+    .then((response) => {
+        const tagsArray = [];
+
+        response.forEach((item) => tagsArray.push({ ...item.data(), id: item.id }));
+
+        return tagsArray;
+    });

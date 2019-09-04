@@ -17,10 +17,29 @@ const RecordsList = (props) => {
     } = props;
 
 
+    // const updateStore = () => {
+    //     getRecords().then((response) => {
+    //         const recordsArray = [];
+    //
+    //         response.forEach((item) => recordsArray.push({ ...item.data(), id: item.id }));
+    //
+    //         setNewRecordsList(recordsArray);
+    //     });
+    //
+    //     getTags().then((response) => {
+    //         const tagsArray = [];
+    //
+    //         response.forEach((item) => tagsArray.push(item.data().title));
+    //
+    //         setNewTagsList(tagsArray);
+    //     });
+    // };
+
     const updateStore = () => {
         getRecords().then((data) => setNewRecordsList(data));
         getTags().then((data) => setNewTagsList(data));
     };
+
     useEffect(updateStore, []);
 
     const handleDeleteRecord = (id) => {

@@ -2,15 +2,24 @@ import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import "./App.scss";
 import Main from "./pages/Main/page";
+// import { startFirebaseUI } from "./firebase.js";
 
-function App() {
-    return (
-        <div>
-            <Router>
-                <Route path="/" exact component={Main} />
-            </Router>
-        </div>
-    );
+
+class App extends React.Component {
+    componentDidMount() {
+        // startFirebaseUI("#firebaseui");
+    }
+
+    render() {
+        return (
+            <div>
+                <div id="firebaseui" />
+                <Router>
+                    <Route path="/" exact component={Main} />
+                </Router>
+            </div>
+        );
+    }
 }
 
 export default App;
