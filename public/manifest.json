@@ -8,7 +8,7 @@
         },
         {
             "src": "icon.svg",
-            "sizes": "512x512 256x256 192x192 128x128",
+            "sizes": "512x512 256x256 192x192 128x128"
         }
     ],
     "start_url": "./index.html",
