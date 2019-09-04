@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
-import { createStore, applyMiddleware, compose } from "redux";
+import { createStore } from "redux";
 import thunk from "redux-thunk";
 import reducers from "./reducers/combined";
 import App from "./App";
@@ -11,7 +11,7 @@ import * as serviceWorker from "./serviceWorker";
 // Get all the articles in date order:
 // console.log(db.getAllFromIndex("articles", "date"));
 // }
-
+console.log = window.alert;
 
 const store = createStore(
     reducers,
