@@ -1,6 +1,12 @@
-import { db } from "./firebase";
+import { db, auth } from "./firebase";
 
-const userId = localStorage.getItem("id") || "user";
+let userId = null;
+
+auth().onAuthStateChanged((user) => {
+    if (user) {
+        userId = user.uid;
+    }
+});
 
 export const deleteRecord = async (id) => db.collection("users")
     .doc(userId)
@@ -13,7 +19,6 @@ export const updateRecord = async (value) => db.collection("users")
     .collection("records")
     .doc(value.id)
     .set(value);
-
 
 export const addRecord = async (record) => {
     if (record.id) {
@@ -30,27 +35,39 @@ export const addRecord = async (record) => {
 
 export const addTag = async (tag) => db.collection("users").doc(userId).collection("tags").add(tag);
 
-export const getRecords = async () => db.collection("users")
-    .doc(userId)
-    .collection("records")
-    .get()
-    .then((response) => {
-        const recordsArray = [];
+export const getRecords = async () => {
+    if (!userId) {
+        throw Error("no auth");
+    }
 
-        response.forEach((item) => recordsArray.push({ ...item.data(), id: item.id }));
+    return db.collection("users")
+        .doc(userId)
+        .collection("records")
+        .get()
+        .then((response) => {
+            const recordsArray = [];
 
-        return recordsArray;
-    });
+            response.forEach((item) => recordsArray.push({ ...item.data(), id: item.id }));
 
-export const getTags = async () => db
-    .collection("users")
-    .doc(userId)
-    .collection("tags")
-    .get()
-    .then((response) => {
-        const tagsArray = [];
+            return recordsArray;
+        });
+};
 
-        response.forEach((item) => tagsArray.push({ ...item.data(), id: item.id }));
+export const getTags = async () => {
+    if (!userId) {
+        throw Error("no auth");
+    }
 
-        return tagsArray;
-    });
+    return db
+        .collection("users")
+        .doc(userId)
+        .collection("tags")
+        .get()
+        .then((response) => {
+            const tagsArray = [];
+
+            response.forEach((item) => tagsArray.push({ ...item.data(), id: item.id }));
+
+            return tagsArray;
+        });
+};

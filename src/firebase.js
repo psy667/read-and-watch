@@ -12,14 +12,41 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
+// firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION)
+//     .then(
+//         () =>
+//         // Existing and future Auth states are now persisted in the current
+//         // session only. Closing the window would clear any existing state even
+//         // if a user forgets to sign out.
+//         // ...
+//         // New sign-in will be persisted with session persistence.
+//             firebase.auth().signInWithEmailAndPassword(email, password),
+//     )
+//     .catch((error) => {
+//     // Handle Errors here.
+//         const errorCode = error.code;
+//         const errorMessage = error.message;
+//         console.log(errorMessage);
+//     });
+
+
 const provider = new firebase.auth.GoogleAuthProvider();
 
-firebase.auth().signInWithPopup(provider).then((result) => {
-    const { user } = result;
-    localStorage.setItem("id", user.uid);
-}).catch((error) => {
-    const errorMessage = error.message;
-    console.log(errorMessage);
-});
 
+firebase.auth().onAuthStateChanged((user) => {
+    if (user) {
+        console.log(user);
+    // User is signed in.
+    } else {
+        firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+            .then(() => {
+                firebase.auth().signInWithRedirect(provider);
+            }).catch((error) => {
+                const errorMessage = error.message;
+                console.log(errorMessage);
+            });
+    }
+});
+//
+export const { auth } = firebase;
 export const db = firebase.firestore();

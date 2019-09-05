@@ -10,7 +10,7 @@ const initialState = {
         tags: [],
     },
     showForm: false,
-
+    loading: true,
 };
 
 export const recordsReducer = (state = initialState, action) => {
@@ -20,6 +20,7 @@ export const recordsReducer = (state = initialState, action) => {
         return {
             ...state,
             list: records,
+            loading: false,
         };
     }
     case actions.RECORDS_LIST_SET_STATUS: {
@@ -54,6 +55,12 @@ export const recordsReducer = (state = initialState, action) => {
             showForm: true,
         };
     }
+    case actions.LOADING_SET: {
+        return {
+            ...state,
+            loading: action.payload.value,
+        };
+    }
     // case actions.RECORD_CREATE: {
     //     const newRecord = {
     //         ...action.payload.record,
@@ -83,6 +90,13 @@ export const recordsReducer = (state = initialState, action) => {
                 tags: [],
             },
         };
+    case actions.UPDATE_LIST: {
+        return {
+            ...state,
+            lastUpdate: action.payload.time,
+            loading: true,
+        };
+    }
     case actions.FORM_OPEN:
         return {
             ...state,

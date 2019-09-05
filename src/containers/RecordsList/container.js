@@ -2,53 +2,43 @@ import React, { useEffect } from "react";
 import cx from "classnames";
 import { Empty } from "antd";
 import { connect } from "react-redux";
-import {
-    getRecords, deleteRecord, updateRecord, getTags,
-} from "../../database";
+
 import { Record } from "../../components/Record/component";
 import {
-    toggleStatusAction, setNewRecordsListAction, editRecordAction, setNewTagsListAction,
+    toggleStatusAction,
+    setNewRecordsListAction,
+    editRecordAction,
+    setNewTagsListAction,
+    updateStoreAction,
+    deleteRecordAction,
+    toggleRecordStatusAction,
 } from "../../actions/actions";
 import "./styles.scss";
 
 const RecordsList = (props) => {
     const {
-        records, setNewRecordsList, editRecord, setNewTagsList, showForm,
+        records,
+        editRecord,
+        showForm,
+        updateStore,
+        loading,
+        toggleRecordStatus,
+        deleteRecord,
+        lastUpdate,
     } = props;
 
 
-    // const updateStore = () => {
-    //     getRecords().then((response) => {
-    //         const recordsArray = [];
-    //
-    //         response.forEach((item) => recordsArray.push({ ...item.data(), id: item.id }));
-    //
-    //         setNewRecordsList(recordsArray);
-    //     });
-    //
-    //     getTags().then((response) => {
-    //         const tagsArray = [];
-    //
-    //         response.forEach((item) => tagsArray.push(item.data().title));
-    //
-    //         setNewTagsList(tagsArray);
-    //     });
-    // };
-
-    const updateStore = () => {
-        getRecords().then((data) => setNewRecordsList(data));
-        getTags().then((data) => setNewTagsList(data));
-    };
-
-    useEffect(updateStore, []);
+    useEffect(() => {
+        updateStore();
+        return (n) => n;
+    }, [lastUpdate, updateStore]);
 
     const handleDeleteRecord = (id) => {
-        deleteRecord(id).then(updateStore);
+        deleteRecord(id);
     };
 
-    const handleToggleStatus = (id, record) => {
-        const updatedRecord = { ...record, status: record.status === "complete" ? "incomplete" : "complete" };
-        updateRecord(updatedRecord).then(updateStore);
+    const handleToggleStatus = (record) => {
+        toggleRecordStatus(record);
     };
 
     return (
@@ -64,15 +54,19 @@ const RecordsList = (props) => {
                         tags={item.tags}
                         link={item.link}
                         status={item.status}
-                        onStatusChange={() => handleToggleStatus(item.id, item)}
+                        onStatusChange={() => handleToggleStatus(item)}
                         onDelete={() => handleDeleteRecord(item.id)}
                         onEdit={() => editRecord(item)}
                     />
                 ))
             }
             {
-                records.length === 0
+                records.length === 0 && !loading
                 && <Empty />
+            }
+            {
+                loading
+                && "loading"
             }
         </div>
     );
@@ -82,6 +76,8 @@ const mapStateToProps = (store) => ({
     records: store.records.list,
     tags: store.tags.list,
     showForm: store.records.showForm,
+    loading: store.records.loading,
+    lastUpdate: store.records.lastUpdate,
 });
 
 const actions = {
@@ -89,6 +85,9 @@ const actions = {
     setNewRecordsList: setNewRecordsListAction,
     editRecord: editRecordAction,
     setNewTagsList: setNewTagsListAction,
+    updateStore: updateStoreAction,
+    toggleRecordStatus: toggleRecordStatusAction,
+    deleteRecord: deleteRecordAction,
 };
 
 export const RecordsListContainer = connect(mapStateToProps, actions)(RecordsList);

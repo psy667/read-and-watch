@@ -8,6 +8,7 @@ import {
     openFormAction,
     setNewRecordsListAction,
     setNewTagsListAction,
+    addRecordAction,
 } from "../../actions/actions";
 import "./styles.scss";
 
@@ -17,9 +18,6 @@ import { InputDescription } from "../../components/InputDescription/component";
 import { InputLink } from "../../components/InputLink/component";
 import { InputTags } from "../../components/InputTags/component";
 import { RecordCreateForm } from "../../components/RecordCreateForm/component";
-import {
-    getRecords, addRecord, addTag, getTags,
-} from "../../database";
 
 
 const RecordCreate = (props) => {
@@ -30,21 +28,12 @@ const RecordCreate = (props) => {
         showForm,
         closeForm,
         openForm,
-        setNewRecordsList,
-        setNewTagsList,
+        addRecord,
     } = props;
 
-    const updateStore = () => {
-        getRecords().then((data) => setNewRecordsList(data));
-        getTags().then((data) => setNewTagsList(data));
-    };
 
     const addRecordToDB = (record) => {
-        record.tags.map((tag) => addTag({ id: tag, value: tag }));
-        addRecord(record).then(() => {
-            updateStore();
-            closeForm();
-        });
+        addRecord(record);
     };
 
 
@@ -98,6 +87,7 @@ const actions = {
     openForm: openFormAction,
     setNewRecordsList: setNewRecordsListAction,
     setNewTagsList: setNewTagsListAction,
+    addRecord: addRecordAction,
 };
 
 export const RecordCreateContainer = connect(mapStateToProps, actions)(RecordCreate);
