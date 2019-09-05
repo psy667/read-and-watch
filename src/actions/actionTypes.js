@@ -23,4 +23,6 @@ export const RECORD_EDIT = "RECORD_EDIT";
 export const TAGS_LIST_UPDATE = "TAGS_LIST_UPDATE";
 export const LOADING_SET = "LOADING_SET";
 export const UPDATE_LIST = "UPDATE_LIST";
+export const RECORD_DELETE = "RECORD_DELETE";
+
 // export const = "";

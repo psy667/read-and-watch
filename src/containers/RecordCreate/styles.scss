@@ -1,10 +1,14 @@
 .create-record{
     .button-wrapper{
+        display: flex;
         position: fixed;
         bottom: 0;
         width: 100%;
         padding: 10px;
         background: #fffe;
+        button{
+            margin: 2px;
+        }
     }
 
 }

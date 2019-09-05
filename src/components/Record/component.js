@@ -18,6 +18,7 @@ export const Record = (props) => {
         onStatusChange,
         onDelete,
         onEdit,
+        uploading,
     } = props;
 
     const [showFullInfo, setShowMode] = useState(false);
@@ -25,15 +26,15 @@ export const Record = (props) => {
     const getDateString = (isoTime) => new Date(isoTime).toLocaleDateString("ru-ru");
 
     return (
-        <Card className={cx("record", { "full-info": showFullInfo })} onMouseEnter={() => setShowMode(true)} onMouseLeave={() => setShowMode(false)}>
+        <Card className={cx("record", { "full-info": showFullInfo, uploading })} onMouseEnter={() => setShowMode(true)} onMouseLeave={() => setShowMode(false)}>
             <div className="header">
                 <div className="tag-wrapper">
                     <Tag color="#108ee9">{type.toUpperCase()}</Tag>
                     <Tag color={status === "complete" ? "green" : "volcano"} onClick={onStatusChange}>{status.toUpperCase()}</Tag>
                 </div>
                 <div className="button-wrapper">
-                    <Button type="normal" shape="circle" icon="edit" size="small" onClick={onEdit} />
-                    <Button type="normal" shape="circle" icon="close" size="small" onClick={onDelete} />
+                    <Button type="normal" shape="circle" icon="edit" size="small" onClick={showFullInfo ? onEdit : () => null} />
+                    <Button type="normal" shape="circle" icon="close" size="small" onClick={showFullInfo ? onDelete : () => null} />
                 </div>
 
 

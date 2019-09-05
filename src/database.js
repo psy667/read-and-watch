@@ -33,7 +33,8 @@ export const addRecord = async (record) => {
     return db.collection("users").doc(userId).collection("records").add(newRecordObject);
 };
 
-export const addTag = async (tag) => db.collection("users").doc(userId).collection("tags").add(tag);
+export const addTag = async (tag) => db.collection("users").doc(userId).collection("tags").doc(tag.id)
+    .set(tag);
 
 export const getRecords = async () => {
     if (!userId) {
@@ -43,6 +44,7 @@ export const getRecords = async () => {
     return db.collection("users")
         .doc(userId)
         .collection("records")
+        .orderBy("date")
         .get()
         .then((response) => {
             const recordsArray = [];

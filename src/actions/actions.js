@@ -11,17 +11,17 @@ import {
     TAGS_LIST_UPDATE,
     LOADING_SET,
     UPDATE_LIST,
+    RECORD_DELETE,
 } from "./actionTypes";
 
 import {
     getRecords, addRecord, deleteRecord, updateRecord, getTags, addTag,
 } from "../database";
 
-export const toggleStatusAction = (id, currentStatus) => ({
+export const toggleStatusAction = (record) => ({
     type: RECORDS_LIST_SET_STATUS,
     payload: {
-        id,
-        currentStatus,
+        record,
     },
 });
 
@@ -40,12 +40,20 @@ export const createRecordAction = (record) => ({
     },
 });
 
+export const deleteRecordAction = (id) => ({
+    type: RECORD_DELETE,
+    payload: {
+        id,
+    },
+});
+
 export const closeFormAction = () => ({
     type: FORM_CLOSE,
 });
 
-export const openFormAction = () => ({
+export const openFormAction = (type) => ({
     type: FORM_OPEN,
+    payload: { type },
 });
 
 export const setNewRecordsListAction = (records) => ({
@@ -61,7 +69,6 @@ export const editRecordAction = (record) => ({
         record,
     },
 });
-
 
 export const setNewTagsListAction = (tags) => ({
     type: TAGS_LIST_UPDATE,
@@ -84,10 +91,10 @@ const updateListAction = () => ({
     },
 });
 
-export const addRecordAction = (record) => async (dispatch) => {
+export const addRecordAsyncAction = (record) => async (dispatch) => {
+    dispatch(createRecordAction());
     dispatch(setLoading(true));
     dispatch(closeFormAction());
-
     record.tags.map((tag) => addTag({ id: tag, value: tag }));
     addRecord(record)
         .then(() => {
@@ -96,32 +103,35 @@ export const addRecordAction = (record) => async (dispatch) => {
 };
 
 
-export const updateStoreAction = (counter = 0) => async (dispatch) => {
+export const updateStoreAsyncAction = (counter = 0) => async (dispatch) => {
     dispatch(setLoading(true));
     getRecords()
         .then((data) => dispatch(setNewRecordsListAction(data)))
-        .catch(() => {
-            if (counter < 100) {
-                setTimeout(() => dispatch(updateStoreAction(counter + 1)), 1000);
+        .catch((e) => {
+            console.log(e);
+            if (counter < 10) {
+                setTimeout(() => dispatch(updateStoreAsyncAction(counter + 1)), 1000);
             }
         });
     getTags()
         .then((data) => dispatch(setNewTagsListAction(data)))
         .catch(() => {
-            if (counter < 100) {
-                setTimeout(() => dispatch(updateStoreAction(counter + 1)), 1000);
+            if (counter < 10) {
+                setTimeout(() => dispatch(updateStoreAsyncAction(counter + 1)), 1000);
             }
         });
 };
 
-export const deleteRecordAction = (id) => async (dispatch) => {
+export const deleteRecordAsyncAction = (id) => async (dispatch) => {
+    dispatch(deleteRecordAction(id));
     deleteRecord(id)
         .then(() => {
             dispatch(updateListAction());
         });
 };
 
-export const toggleRecordStatusAction = (record) => async (dispatch) => {
+export const toggleRecordStatusAsyncAction = (record) => async (dispatch) => {
+    dispatch(toggleStatusAction(record));
     const updatedRecord = { ...record, status: record.status === "complete" ? "incomplete" : "complete" };
     updateRecord(updatedRecord)
         .then(() => {

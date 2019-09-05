@@ -8,7 +8,7 @@ import {
     openFormAction,
     setNewRecordsListAction,
     setNewTagsListAction,
-    addRecordAction,
+    addRecordAsyncAction,
 } from "../../actions/actions";
 import "./styles.scss";
 
@@ -29,6 +29,7 @@ const RecordCreate = (props) => {
         closeForm,
         openForm,
         addRecord,
+        formMode,
     } = props;
 
 
@@ -43,11 +44,44 @@ const RecordCreate = (props) => {
                 <Button
                     type="primary"
                     block
-                    icon="plus-circle"
+                    // icon="plus-circle"
                     size="large"
-                    onClick={openForm}
+                    onClick={() => openForm("book")}
                 >
-Add new record
+Book
+
+                </Button>
+                <Button
+                    type="primary"
+                    block
+                    // icon="plus-circle"
+                    size="large"
+                    onClick={() => openForm("movie")}
+
+                >
+Movie
+
+                </Button>
+                <Button
+                    type="primary"
+                    block
+                    // icon="plus-circle"
+                    size="large"
+                    onClick={() => openForm("article")}
+
+                >
+Article
+
+                </Button>
+                <Button
+                    type="primary"
+                    block
+                    // icon="plus-circle"
+                    size="large"
+                    onClick={() => openForm("video")}
+
+                >
+Video
 
                 </Button>
             </div>
@@ -57,8 +91,10 @@ Add new record
                 onCreate={addRecordToDB}
                 visible={showForm}
                 closeForm={closeForm}
+                formMode={formMode}
+                type={newRecord.type}
             >
-                <InputType value={newRecord.type} onChange={(value) => setValueNewRecord("type", value)} />
+                { formMode === "edit" && <InputType value={newRecord.type} onChange={(value) => setValueNewRecord("type", value)} /> }
                 {
                     ["video", "article"].includes(newRecord.type)
                         ? <InputLink onChange={(value) => setValueNewRecord("link", value)} />
@@ -79,6 +115,7 @@ const mapStateToProps = (store) => ({
     newRecord: store.records.newRecord,
     tags: store.tags.list,
     showForm: store.records.showForm,
+    formMode: store.records.formMode,
 });
 
 const actions = {
@@ -87,7 +124,7 @@ const actions = {
     openForm: openFormAction,
     setNewRecordsList: setNewRecordsListAction,
     setNewTagsList: setNewTagsListAction,
-    addRecord: addRecordAction,
+    addRecord: addRecordAsyncAction,
 };
 
 export const RecordCreateContainer = connect(mapStateToProps, actions)(RecordCreate);

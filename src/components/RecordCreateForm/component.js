@@ -10,6 +10,8 @@ export const RecordCreateForm = (props) => {
         children,
         visible,
         closeForm,
+        formMode,
+        type,
     } = props;
 
     const handleSubmit = (e) => {
@@ -19,7 +21,7 @@ export const RecordCreateForm = (props) => {
 
     return (
         <Drawer
-            title="Add new record"
+            title={formMode === "edit" ? "Edit record" : `Add new ${type}`}
             placement="bottom"
             height={400}
             visible={visible}

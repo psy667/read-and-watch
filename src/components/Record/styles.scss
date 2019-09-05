@@ -2,8 +2,12 @@
 
 .record{
     margin-bottom: 8px;
+    max-height: 80px;
+    transition-duration: 0.3s;
+    overflow: hidden;
     .ant-card-body{
         padding: 16px;
+        height: 100%;
     }
     .header{
         justify-content: space-between;
@@ -19,21 +23,32 @@
         margin: 0;
     }
     .tags{
-        overflow: scroll;
+        // overflow: scroll;
         padding-bottom: 8px;
     }
 
     .button-wrapper, .description, .tags, .date{
-        display: none;
+        opacity: 0;
+        overflow: hidden;
+        transition-duration: 0.3s;
+
     }
-    
+
     &.full-info{
+        max-height: 300px;
+        transition-duration: 0.6s;
+
         .button-wrapper, .description, .date{
+            opacity: 1;
             display: block;
         }
         .tags{
+            opacity: 1;
+
             display: flex;
         }
     }
+    &.uploading{
+        opacity: 0.5;
+    }
 }
-

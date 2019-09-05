@@ -5,25 +5,22 @@ import { connect } from "react-redux";
 
 import { Record } from "../../components/Record/component";
 import {
-    toggleStatusAction,
-    setNewRecordsListAction,
     editRecordAction,
-    setNewTagsListAction,
-    updateStoreAction,
-    deleteRecordAction,
-    toggleRecordStatusAction,
+    updateStoreAsyncAction,
+    deleteRecordAsyncAction,
+    toggleRecordStatusAsyncAction,
 } from "../../actions/actions";
 import "./styles.scss";
 
 const RecordsList = (props) => {
     const {
-        records,
         editRecord,
-        showForm,
         updateStore,
-        loading,
         toggleRecordStatus,
         deleteRecord,
+        records,
+        showForm,
+        loading,
         lastUpdate,
     } = props;
 
@@ -57,6 +54,7 @@ const RecordsList = (props) => {
                         onStatusChange={() => handleToggleStatus(item)}
                         onDelete={() => handleDeleteRecord(item.id)}
                         onEdit={() => editRecord(item)}
+                        uploading={item.uploading}
                     />
                 ))
             }
@@ -64,30 +62,22 @@ const RecordsList = (props) => {
                 records.length === 0 && !loading
                 && <Empty />
             }
-            {
-                loading
-                && "loading"
-            }
         </div>
     );
 };
 
 const mapStateToProps = (store) => ({
     records: store.records.list,
-    tags: store.tags.list,
     showForm: store.records.showForm,
     loading: store.records.loading,
     lastUpdate: store.records.lastUpdate,
 });
 
 const actions = {
-    toggleStatus: toggleStatusAction,
-    setNewRecordsList: setNewRecordsListAction,
     editRecord: editRecordAction,
-    setNewTagsList: setNewTagsListAction,
-    updateStore: updateStoreAction,
-    toggleRecordStatus: toggleRecordStatusAction,
-    deleteRecord: deleteRecordAction,
+    updateStore: updateStoreAsyncAction,
+    toggleRecordStatus: toggleRecordStatusAsyncAction,
+    deleteRecord: deleteRecordAsyncAction,
 };
 
 export const RecordsListContainer = connect(mapStateToProps, actions)(RecordsList);

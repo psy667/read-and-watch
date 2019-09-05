@@ -11,6 +11,7 @@ const initialState = {
     },
     showForm: false,
     loading: true,
+    formMode: "add",
 };
 
 export const recordsReducer = (state = initialState, action) => {
@@ -24,11 +25,11 @@ export const recordsReducer = (state = initialState, action) => {
         };
     }
     case actions.RECORDS_LIST_SET_STATUS: {
-        const { id, currentStatus } = action.payload;
+        const { id, status } = action.payload.record;
 
         const list = state.list.map((item) => {
             if (item.id === id) {
-                return { ...item, status: currentStatus === "complete" ? "incomplete" : "complete" };
+                return { ...item, status: status === "complete" ? "incomplete" : "complete" };
             }
             return item;
         });
@@ -53,6 +54,7 @@ export const recordsReducer = (state = initialState, action) => {
             ...state,
             newRecord: action.payload.record,
             showForm: true,
+            formMode: "edit",
         };
     }
     case actions.LOADING_SET: {
@@ -61,24 +63,19 @@ export const recordsReducer = (state = initialState, action) => {
             loading: action.payload.value,
         };
     }
-    // case actions.RECORD_CREATE: {
-    //     const newRecord = {
-    //         ...action.payload.record,
-    //         id: getNewId(),
-    //         date: new Date().getTime(),
-    //         status: "incomplete",
-    //     };
-    //     return {
-    //         ...state,
-    //         list: [...state.list, action.payload.record],
-    //         newRecord: {
-    //             title: null,
-    //             description: null,
-    //             type: null,
-    //             tags: [],
-    //         },
-    //     };
-    // }
+    case actions.RECORD_CREATE: {
+        const newRecord = {
+            ...state.newRecord,
+            id: Math.random().toFixed(8),
+            date: new Date().getTime(),
+            status: "incomplete",
+            uploading: true,
+        };
+        return {
+            ...state,
+            list: [...state.list, newRecord],
+        };
+    }
     case actions.FORM_CLOSE:
         return {
             ...state,
@@ -100,8 +97,17 @@ export const recordsReducer = (state = initialState, action) => {
     case actions.FORM_OPEN:
         return {
             ...state,
+            formMode: "add",
             showForm: true,
+            newRecord: { ...state.newRecord, type: action.payload.type },
         };
+    case actions.RECORD_DELETE: {
+        const { id } = action.payload;
+        return {
+            ...state,
+            list: state.list.filter((item) => item.id !== id),
+        };
+    }
     default:
         return state;
     }
