@@ -23,7 +23,6 @@
         margin: 0;
     }
     .tags{
-        // overflow: scroll;
         padding-bottom: 8px;
     }
 
@@ -33,7 +32,13 @@
         transition-duration: 0.3s;
 
     }
-
+    &:not(.full-info){
+        h4{
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+    }
     &.full-info{
         max-height: 300px;
         transition-duration: 0.6s;

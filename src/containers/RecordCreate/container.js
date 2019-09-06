@@ -100,7 +100,7 @@ Video
                         ? <InputLink onChange={(value) => setValueNewRecord("link", value)} />
                         : null
                 }
-                <InputTitle value={newRecord.title} onChange={(value) => setValueNewRecord("title", value)} />
+                <InputTitle value={newRecord.title} type={newRecord.type} onChange={(value) => setValueNewRecord("title", value)} />
                 <InputDescription value={newRecord.description} onChange={(value) => setValueNewRecord("description", value)} />
                 <InputTags value={newRecord.tags} onChange={(value) => setValueNewRecord("tags", value)}>
                     {tags}
