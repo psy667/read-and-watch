@@ -1,6 +1,5 @@
 import {
-    RECORDS_LIST_FILTER,
-    RECORDS_LIST_SORT,
+    RECORDS_LIST_SEARCH,
     RECORDS_LIST_SET_STATUS,
     RECORD_CREATE,
     RECORD_CREATE_SET_VALUE,
@@ -84,6 +83,13 @@ export const setLoading = (value) => ({
     },
 });
 
+export const searchAction = (query) => ({
+    type: RECORDS_LIST_SEARCH,
+    payload: {
+        query,
+    },
+});
+
 const updateListAction = () => ({
     type: UPDATE_LIST,
     payload: {
@@ -108,7 +114,8 @@ export const updateStoreAsyncAction = (counter = 0) => async (dispatch) => {
     getRecords()
         .then((data) => dispatch(setNewRecordsListAction(data)))
         .catch((e) => {
-            console.log(e);
+            // eslint-disable-next-line no-console
+            console.log(e.message);
             if (counter < 10) {
                 setTimeout(() => dispatch(updateStoreAsyncAction(counter + 1)), 1000);
             }

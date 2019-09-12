@@ -7,6 +7,7 @@ import {
 import { auth } from "../../firebase";
 
 import "./styles.scss";
+import { searchAction } from "../../actions/actions";
 
 const { Search } = Input;
 
@@ -15,13 +16,16 @@ const RecordsHeader = (props) => {
     const {
         loading,
         showForm,
+        search,
     } = props;
-
+    const handleInput = (e) => {
+        search(e.target.value);
+    };
     const { photoURL, displayName } = auth().currentUser || {};
     return (
         <div className={cx("records-header", { "show-form": showForm })}>
             <div className="wrapper">
-                <Search placeholder="Search by title, description or tags" />
+                <Search placeholder="Search by title, description or tags" onChange={handleInput} />
                 <Tooltip title={displayName} placement="bottomRight">
                     <Avatar src={photoURL} />
                 </Tooltip>
@@ -39,7 +43,7 @@ const mapStateToProps = (store) => ({
 });
 
 const actions = {
-
+    search: searchAction,
 };
 
 export const RecordsHeaderContainer = connect(mapStateToProps, actions)(RecordsHeader);

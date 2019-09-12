@@ -18,7 +18,7 @@ export const InputTitle = (props) => {
     const language = "ru";
 
     const searchBooks = (query) => {
-        jsonp(`https://www.googleapis.com/books/v1/volumes?q=${encodeURI(query)}&key=AIzaSyA9tqxEOLsVxOHjBTV8i2zFxIr5iTgIlf8`,
+        jsonp(`https://www.googleapis.com/books/v1/volumes?q=${encodeURI(query)}&key=${process.env.REACT_APP_BOOK_API_KEY}`,
             null, (err, data) => {
                 if (err) {
                     return null;
@@ -31,7 +31,7 @@ export const InputTitle = (props) => {
             });
     };
     const searchMovies = (query) => {
-        jsonp(`https://api.themoviedb.org/3/search/movie?api_key=250da43531a1ef1c191106a7ba900be7&query=${encodeURI(query)}&language=${language}`,
+        jsonp(`https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_MOVIE_API_KEY}&query=${encodeURI(query)}&language=${language}`,
             null, (err, data) => {
                 if (err) {
                     return null;

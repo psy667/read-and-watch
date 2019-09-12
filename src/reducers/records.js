@@ -12,6 +12,7 @@ const initialState = {
     showForm: false,
     loading: true,
     formMode: "add",
+    searchQuery: "",
 };
 
 export const recordsReducer = (state = initialState, action) => {
@@ -106,6 +107,13 @@ export const recordsReducer = (state = initialState, action) => {
         return {
             ...state,
             list: state.list.filter((item) => item.id !== id),
+        };
+    }
+
+    case actions.RECORDS_LIST_SEARCH: {
+        return {
+            ...state,
+            searchQuery: action.payload.query,
         };
     }
     default:

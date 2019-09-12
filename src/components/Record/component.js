@@ -19,6 +19,7 @@ export const Record = (props) => {
         onDelete,
         onEdit,
         uploading,
+        link,
     } = props;
 
     const [showFullInfo, setShowMode] = useState(false);
@@ -26,7 +27,11 @@ export const Record = (props) => {
     const getDateString = (isoTime) => new Date(isoTime).toLocaleDateString("ru-ru");
 
     return (
-        <Card className={cx("record", { "full-info": showFullInfo, uploading })} onMouseEnter={() => setShowMode(true)} onMouseLeave={() => setShowMode(false)}>
+        <Card
+            className={cx("record", { "full-info": showFullInfo, uploading })}
+            onMouseEnter={() => setShowMode(true)}
+            onMouseLeave={() => setShowMode(false)}
+        >
             <div className="header">
                 <div className="tag-wrapper">
                     <Tag color="#108ee9">{type.toUpperCase()}</Tag>
@@ -39,7 +44,13 @@ export const Record = (props) => {
 
 
             </div>
-            <Title level={4}>{title}</Title>
+            <Title level={4}>
+                {
+                    link
+                        ? <a href={link} target="_blank" rel="noopener noreferrer">{title}</a>
+                        : <>{ title }</>
+                }
+            </Title>
             <Text className="description">{description}</Text>
             <div className="tags">
                 {

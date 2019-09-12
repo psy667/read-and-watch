@@ -11,6 +11,7 @@ import {
     toggleRecordStatusAsyncAction,
 } from "../../actions/actions";
 import "./styles.scss";
+import { search } from "../../selectors/records";
 
 const RecordsList = (props) => {
     const {
@@ -67,7 +68,7 @@ const RecordsList = (props) => {
 };
 
 const mapStateToProps = (store) => ({
-    records: store.records.list,
+    records: search(store),
     showForm: store.records.showForm,
     loading: store.records.loading,
     lastUpdate: store.records.lastUpdate,

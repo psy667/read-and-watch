@@ -3,13 +3,13 @@ import "firebase/auth";
 import "firebase/firestore";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyD_BiBJCaJSBdWO82jdxAOdvcnsWmn_DVw",
+    apiKey: process.env.REACT_APP_API_KEY,
     authDomain: "read-and-watch.firebaseapp.com",
     databaseURL: "https://read-and-watch.firebaseio.com",
     projectId: "read-and-watch",
     storageBucket: "read-and-watch.appspot.com",
-    messagingSenderId: "1005289530359",
-    appId: "1:1005289530359:web:19352fec4ee63bad9984f2",
+    messagingSenderId: process.env.REACT_APP_MESSAGE_SENDER_ID,
+    appId: process.env.REACT_APP_APP_ID,
 };
 
 firebase.initializeApp(firebaseConfig);
@@ -19,7 +19,6 @@ const provider = new firebase.auth.GoogleAuthProvider();
 
 firebase.auth().onAuthStateChanged((user) => {
     if (user) {
-        console.log(user);
     // User is signed in.
     } else {
         firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
@@ -27,7 +26,8 @@ firebase.auth().onAuthStateChanged((user) => {
                 firebase.auth().signInWithPopup(provider);
             }).catch((error) => {
                 const errorMessage = error.message;
-                console.log(errorMessage);
+                // eslint-disable-next-line no-console
+                console.dir(errorMessage);
             });
     }
 });

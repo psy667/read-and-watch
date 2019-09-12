@@ -97,7 +97,7 @@ Video
                 { formMode === "edit" && <InputType value={newRecord.type} onChange={(value) => setValueNewRecord("type", value)} /> }
                 {
                     ["video", "article"].includes(newRecord.type)
-                        ? <InputLink onChange={(value) => setValueNewRecord("link", value)} />
+                        ? <InputLink value={newRecord.link} onChange={(value) => setValueNewRecord("link", value)} />
                         : null
                 }
                 <InputTitle value={newRecord.title} type={newRecord.type} onChange={(value) => setValueNewRecord("title", value)} />
