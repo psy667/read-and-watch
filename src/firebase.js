@@ -2,13 +2,6 @@ import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/firestore";
 
-[
-    "REACT_APP_API_KEY",
-    "REACT_APP_MESSAGE_SENDER_ID",
-    "REACT_APP_APP_ID",
-    "REACT_APP_MOVIE_API_KEY",
-    "REACT_APP_BOOK_API_KEY",
-].forEach((item) => console.log(`${item}: ${process.env[item]}`));
 
 const firebaseConfig = {
     apiKey: process.env.REACT_APP_API_KEY,
