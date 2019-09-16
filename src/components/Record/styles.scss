@@ -6,6 +6,9 @@
     transition-duration: 0.3s;
     overflow: hidden;
     user-select:none;
+    border-radius: 8px;
+    background: #F4F5FA;
+    box-shadow: 0px 2px 8px rgba(83, 87, 106, 0.04);
 
     .ant-card-body{
         padding: 16px;
@@ -14,7 +17,7 @@
     .header{
         justify-content: space-between;
         display: flex;
-        height: 24px;
+        height: 0px;
         .button-wrapper{
             button{
                 margin-left: 8px;
@@ -34,17 +37,51 @@
         transition-duration: 0.3s;
 
     }
+    .title{
+        display: flex;
+        align-items: center;
+        .indicator{
+            width: 16px;
+            height: 16px;
+            margin-right: 8px;
+            background: #888;
+            border-radius: 8px;
+            box-sizing: border-box;
+            &.complete{
+                background: linear-gradient(90deg, #27AE7D 0.72%, #6FCF97 100%);
+            }
+            &.incomplete{
+                background: linear-gradient(90deg, #FF8484 0.72%, #FFB580 100%);
+            }
+        }
+        h4{
+            flex: 1;
+
+        }
+    }
+
     &:not(.full-info){
         h4{
             overflow: hidden;
             white-space: nowrap;
             text-overflow: ellipsis;
         }
+        .tags{
+            padding: 0;
+            height: 0;
+
+        }
+        .description{
+            display: none;
+        }
     }
     &.full-info{
         max-height: 300px;
         transition-duration: 0.6s;
+        .header{
+            height: auto;
 
+        }
         .button-wrapper, .description, .date{
             opacity: 1;
             display: block;
@@ -53,6 +90,9 @@
             opacity: 1;
 
             display: flex;
+            .ant-tag{
+                border-radius: 16px;
+            }
         }
     }
     &.uploading{

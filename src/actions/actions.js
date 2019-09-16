@@ -10,7 +10,7 @@ import {
     TAGS_LIST_UPDATE,
     LOADING_SET,
     UPDATE_LIST,
-    RECORD_DELETE,
+    RECORD_DELETE, RECORDS_LIST_FILTER_BY_TYPE, RECORDS_LIST_FILTER_BY_STATUS,
 } from "./actionTypes";
 
 import {
@@ -94,6 +94,20 @@ const updateListAction = () => ({
     type: UPDATE_LIST,
     payload: {
         time: new Date().getTime(),
+    },
+});
+
+export const filterByTypeAction = (type) => ({
+    type: RECORDS_LIST_FILTER_BY_TYPE,
+    payload: {
+        type,
+    },
+});
+
+export const filterByStatusAction = (status) => ({
+    type: RECORDS_LIST_FILTER_BY_STATUS,
+    payload: {
+        status,
     },
 });
 

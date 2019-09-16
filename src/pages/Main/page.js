@@ -6,11 +6,11 @@ import { RecordsHeaderContainer } from "../../containers/RecordsHeader/container
 
 function Main() {
     return (
-        <div>
+        <>
             <RecordsHeaderContainer />
             <RecordsListContainer />
             <RecordCreateContainer />
-        </div>
+        </>
     );
 }
 

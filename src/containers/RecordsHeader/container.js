@@ -1,15 +1,16 @@
 import React from "react";
 import cx from "classnames";
 import { connect } from "react-redux";
-import {
-    Progress, Input, Avatar, Tooltip,
-} from "antd";
-import { auth } from "../../firebase";
 
 import "./styles.scss";
-import { searchAction } from "../../actions/actions";
 
-const { Search } = Input;
+import Tooltip from "antd/es/tooltip";
+import Avatar from "antd/es/avatar";
+import Progress from "antd/es/progress";
+import Search from "antd/es/input/Search";
+
+import { filterByStatusAction, filterByTypeAction, searchAction } from "../../actions/actions";
+import { auth } from "../../firebase";
 
 
 const RecordsHeader = (props) => {
@@ -17,6 +18,8 @@ const RecordsHeader = (props) => {
         loading,
         showForm,
         search,
+        filterByType,
+        selectedType,
     } = props;
     const handleInput = (e) => {
         search(e.target.value);
@@ -24,13 +27,41 @@ const RecordsHeader = (props) => {
     const { photoURL, displayName } = auth().currentUser || {};
     return (
         <div className={cx("records-header", { "show-form": showForm })}>
+            <Progress percent={100} size="small" status={loading ? "active" : "normal"} showInfo={false} />
+
             <div className="wrapper">
-                <Search placeholder="Search by title, description or tags" onChange={handleInput} />
+                <Search placeholder="Search by title or tags" allowClear onChange={handleInput} />
                 <Tooltip title={displayName} placement="bottomRight">
                     <Avatar src={photoURL} />
                 </Tooltip>
             </div>
-            <Progress percent={100} size="small" status={loading ? "active" : "normal"} showInfo={false} />
+            <div className="tabs">
+                <div
+                    className={cx({ active: selectedType === "book" })}
+                    onClick={() => filterByType("book")}
+                >
+                    Books
+                </div>
+                <div
+                    className={cx({ active: selectedType === "movie" })}
+                    onClick={() => filterByType("movie")}
+                >
+                    Movies
+                </div>
+                <div
+                    className={cx({ active: selectedType === "article" })}
+                    onClick={() => filterByType("article")}
+                >
+                    Articles
+                </div>
+                <div
+                    className={cx({ active: selectedType === "video" })}
+                    onClick={() => filterByType("video")}
+                >
+                    Videos
+                </div>
+
+            </div>
         </div>
     );
 };
@@ -40,10 +71,13 @@ const mapStateToProps = (store) => ({
     tags: store.tags.list,
     showForm: store.records.showForm,
     loading: store.records.loading,
+    selectedType: store.records.selectedType,
 });
 
 const actions = {
     search: searchAction,
+    filterByType: filterByTypeAction,
+    filterByStatus: filterByStatusAction,
 };
 
 export const RecordsHeaderContainer = connect(mapStateToProps, actions)(RecordsHeader);

@@ -1,4 +1,6 @@
 import * as actions from "../actions/actionTypes";
+import { RECORDS_LIST_FILTER_BY_TYPE } from "../actions/actionTypes";
+import { RECORDS_LIST_FILTER_BY_STATUS } from "../actions/actionTypes";
 
 const initialState = {
     list: [
@@ -13,6 +15,8 @@ const initialState = {
     loading: true,
     formMode: "add",
     searchQuery: "",
+    selectedType: "book",
+    selectedStatus: null,
 };
 
 export const recordsReducer = (state = initialState, action) => {
@@ -114,6 +118,20 @@ export const recordsReducer = (state = initialState, action) => {
         return {
             ...state,
             searchQuery: action.payload.query,
+        };
+    }
+    case RECORDS_LIST_FILTER_BY_TYPE: {
+        const { type } = action.payload;
+        return {
+            ...state,
+            selectedType: type,
+        };
+    }
+    case RECORDS_LIST_FILTER_BY_STATUS: {
+        const { status } = action.payload;
+        return {
+            ...state,
+            selectedStatus: status,
         };
     }
     default:

@@ -1,1 +1,8 @@
 @import '~antd/dist/antd.css';
+
+.app{
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: #E6E8F1;
+}

@@ -11,7 +11,6 @@ export const Record = (props) => {
     const {
         title,
         description,
-        type,
         date,
         status,
         tags,
@@ -25,17 +24,21 @@ export const Record = (props) => {
     const [showFullInfo, setShowMode] = useState(false);
 
     const getDateString = (isoTime) => new Date(isoTime).toLocaleDateString("ru-ru");
-
+    const handleStatusChange = () => {
+        window.navigator.vibrate([20, 20, 20]);
+        onStatusChange();
+    };
     return (
         <Card
             className={cx("record", { "full-info": showFullInfo, uploading })}
             onMouseEnter={() => setShowMode(true)}
             onMouseLeave={() => setShowMode(false)}
         >
+
             <div className="header">
                 <div className="tag-wrapper">
-                    <Tag color="#108ee9">{type.toUpperCase()}</Tag>
-                    <Tag color={status === "complete" ? "green" : "volcano"} onClick={onStatusChange}>{status.toUpperCase()}</Tag>
+                    <Text className="date" type="secondary">{getDateString(date)}</Text>
+
                 </div>
                 <div className="button-wrapper">
                     <Button type="normal" shape="circle" icon="edit" size="small" onClick={showFullInfo ? onEdit : () => null} />
@@ -44,20 +47,22 @@ export const Record = (props) => {
 
 
             </div>
-            <Title level={4}>
-                {
-                    link
-                        ? <a href={link} target="_blank" rel="noopener noreferrer">{title}</a>
-                        : <>{ title }</>
-                }
-            </Title>
+            <div className="title">
+                <div className={cx("indicator", status === "complete" ? "complete" : "incomplete")} onClick={handleStatusChange} />
+                <Title level={4}>
+                    {
+                        link
+                            ? <a href={link} target="_blank" rel="noopener noreferrer">{title}</a>
+                            : <>{ title }</>
+                    }
+                </Title>
+            </div>
             <Text className="description">{description}</Text>
             <div className="tags">
                 {
                     tags.map((item) => <Tag key={item}>{item}</Tag>)
                 }
             </div>
-            <Text className="date" type="secondary">{getDateString(date)}</Text>
 
         </Card>
     );

@@ -1,7 +1,7 @@
 import React from "react";
 
 import { connect } from "react-redux";
-import { Button } from "antd";
+
 import {
     setValueNewRecordAction,
     closeFormAction,
@@ -30,6 +30,7 @@ const RecordCreate = (props) => {
         openForm,
         addRecord,
         formMode,
+        selectedType,
     } = props;
 
 
@@ -41,49 +42,10 @@ const RecordCreate = (props) => {
     return (
         <div className="create-record">
             <div className="button-wrapper">
-                <Button
-                    type="primary"
-                    block
-                    // icon="plus-circle"
-                    size="large"
-                    onClick={() => openForm("book")}
-                >
-Book
-
-                </Button>
-                <Button
-                    type="primary"
-                    block
-                    // icon="plus-circle"
-                    size="large"
-                    onClick={() => openForm("movie")}
-
-                >
-Movie
-
-                </Button>
-                <Button
-                    type="primary"
-                    block
-                    // icon="plus-circle"
-                    size="large"
-                    onClick={() => openForm("article")}
-
-                >
-Article
-
-                </Button>
-                <Button
-                    type="primary"
-                    block
-                    // icon="plus-circle"
-                    size="large"
-                    onClick={() => openForm("video")}
-
-                >
-Video
-
-                </Button>
+                <button
+                    className="add-new-record"
+                    onClick={() => openForm(selectedType)}
+                />
             </div>
 
             <RecordCreateForm
@@ -116,6 +78,7 @@ const mapStateToProps = (store) => ({
     tags: store.tags.list,
     showForm: store.records.showForm,
     formMode: store.records.formMode,
+    selectedType: store.records.selectedType,
 });
 
 const actions = {

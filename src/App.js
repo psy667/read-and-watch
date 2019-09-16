@@ -12,8 +12,7 @@ class App extends React.Component {
 
     render() {
         return (
-            <div>
-                <div id="firebaseui" />
+            <div className={"app"}>
                 <Router>
                     <Route path="/" exact component={Main} />
                 </Router>
