@@ -1,11 +1,11 @@
 {
   "build": {
     "env": {
-      "REACT_APP_API_KEY": "api_key",
-      "REACT_APP_MESSAGE_SENDER_ID": "message_sender_id",
-      "REACT_APP_APP_ID":  "app_id",
-      "REACT_APP_MOVIE_API_KEY": "movie_api_key",
-      "REACT_APP_BOOK_API_KEY":  "book_api_key"
+      "REACT_APP_API_KEY": "@api_key",
+      "REACT_APP_MESSAGE_SENDER_ID": "@message_sender_id",
+      "REACT_APP_APP_ID":  "@app_id",
+      "REACT_APP_MOVIE_API_KEY": "@movie_api_key",
+      "REACT_APP_BOOK_API_KEY":  "@book_api_key"
     }
   }
 }
