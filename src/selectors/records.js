@@ -10,7 +10,6 @@ const filterByText = (item, query) => {
 const filterByTags = (item, query) => item.tags.some((tag) => find(tag, query));
 
 const filterByType = (item, selectedType) => {
-    console.log(item.type);
     if (!selectedType) {
         return true;
     }
