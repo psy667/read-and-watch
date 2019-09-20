@@ -3,12 +3,12 @@ import React from "react";
 import { connect } from "react-redux";
 
 import {
-    setValueNewRecordAction,
+    addRecordAsyncAction,
     closeFormAction,
     openFormAction,
     setNewRecordsListAction,
     setNewTagsListAction,
-    addRecordAsyncAction,
+    setValueNewRecordAction,
 } from "../../actions/actions";
 import "./styles.scss";
 
@@ -33,11 +33,9 @@ const RecordCreate = (props) => {
         selectedType,
     } = props;
 
-
     const addRecordToDB = (record) => {
         addRecord(record);
     };
-
 
     return (
         <div className="create-record">

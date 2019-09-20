@@ -2,7 +2,6 @@ import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/firestore";
 
-
 const firebaseConfig = {
     apiKey: process.env.REACT_APP_API_KEY,
     authDomain: "read-and-watch.firebaseapp.com",

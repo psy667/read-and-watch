@@ -1,10 +1,10 @@
 import React from "react";
-import { Input, Form } from "antd";
 
 import "./styles.scss";
+import Input from "antd/es/input";
+import Form from "antd/es/form";
 
 const { TextArea } = Input;
-
 
 export const InputDescription = (props) => {
     const {

@@ -1,11 +1,11 @@
 const find = (text, query) => Boolean(text.toLowerCase().indexOf(query.toLowerCase()) + 1);
 
 const filterByText = (item, query) => {
-    if(!query){
+    if (!query) {
         return true;
     }
-    find(item.title, query);
-}
+    return find(item.title, query);
+};
 
 const filterByTags = (item, query) => item.tags.some((tag) => find(tag, query));
 

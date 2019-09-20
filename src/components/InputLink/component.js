@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { Input, Form } from "antd";
-
+import Input from "antd/es/input";
+import Form from "antd/es/form";
 
 import "./styles.scss";
 

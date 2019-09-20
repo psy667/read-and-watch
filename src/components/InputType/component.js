@@ -1,7 +1,9 @@
 import React from "react";
-import { Radio, Form } from "antd";
-import "./styles.scss";
 
+import Radio from "antd/es/radio";
+import Form from "antd/es/form";
+
+import "./styles.scss";
 
 export const InputType = (props) => {
     const {

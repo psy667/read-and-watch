@@ -2,9 +2,6 @@ import * as actions from "../actions/actionTypes";
 
 const initialState = {
     list: [
-        "Художественная литература",
-        "20-ый век",
-        "Антиутопия",
     ],
 };
 

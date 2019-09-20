@@ -1,7 +1,11 @@
 import React from "react";
 
-import { Form, Button, Drawer } from "antd";
+import Form from "antd/es/form";
+import Button from "antd/es/button";
+import Drawer from "antd/es/drawer";
+
 import "./styles.scss";
+
 
 export const RecordCreateForm = (props) => {
     const {

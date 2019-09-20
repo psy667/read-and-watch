@@ -1,5 +1,6 @@
 import React from "react";
-import { Select, Form } from "antd";
+import Select from "antd/es/select";
+import Form from "antd/es/form";
 
 import "./styles.scss";
 

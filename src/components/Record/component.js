@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import cx from "classnames";
-import {
-    Card, Typography, Tag, Button,
-} from "antd";
+
 import "./styles.scss";
+import Card from "antd/es/card";
+import Typography from "antd/es/typography";
+import Tag from "antd/es/tag";
+import Button from "antd/es/button";
 
 const { Text, Title } = Typography;
 

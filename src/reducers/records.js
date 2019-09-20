@@ -1,6 +1,18 @@
-import * as actions from "../actions/actionTypes";
-import { RECORDS_LIST_FILTER_BY_TYPE } from "../actions/actionTypes";
-import { RECORDS_LIST_FILTER_BY_STATUS } from "../actions/actionTypes";
+import {
+    FORM_CLOSE,
+    FORM_OPEN,
+    LOADING_SET,
+    RECORD_CREATE,
+    RECORD_CREATE_SET_VALUE,
+    RECORD_DELETE,
+    RECORD_EDIT,
+    RECORDS_LIST_FILTER_BY_STATUS,
+    RECORDS_LIST_FILTER_BY_TYPE,
+    RECORDS_LIST_SEARCH,
+    RECORDS_LIST_SET_STATUS,
+    RECORDS_LIST_UPDATE,
+    UPDATE_LIST,
+} from "../actions/actionTypes";
 
 const initialState = {
     list: [
@@ -21,7 +33,7 @@ const initialState = {
 
 export const recordsReducer = (state = initialState, action) => {
     switch (action.type) {
-    case actions.RECORDS_LIST_UPDATE: {
+    case RECORDS_LIST_UPDATE: {
         const { records } = action.payload;
         return {
             ...state,
@@ -29,7 +41,7 @@ export const recordsReducer = (state = initialState, action) => {
             loading: false,
         };
     }
-    case actions.RECORDS_LIST_SET_STATUS: {
+    case RECORDS_LIST_SET_STATUS: {
         const { id, status } = action.payload.record;
 
         const list = state.list.map((item) => {
@@ -44,7 +56,7 @@ export const recordsReducer = (state = initialState, action) => {
             list,
         };
     }
-    case actions.RECORD_CREATE_SET_VALUE: {
+    case RECORD_CREATE_SET_VALUE: {
         const { key, value } = action.payload;
         if (["title", "description", "type", "tags", "link"].includes(key)) {
             return {
@@ -54,7 +66,7 @@ export const recordsReducer = (state = initialState, action) => {
         }
         return state;
     }
-    case actions.RECORD_EDIT: {
+    case RECORD_EDIT: {
         return {
             ...state,
             newRecord: action.payload.record,
@@ -62,13 +74,13 @@ export const recordsReducer = (state = initialState, action) => {
             formMode: "edit",
         };
     }
-    case actions.LOADING_SET: {
+    case LOADING_SET: {
         return {
             ...state,
             loading: action.payload.value,
         };
     }
-    case actions.RECORD_CREATE: {
+    case RECORD_CREATE: {
         const newRecord = {
             ...state.newRecord,
             id: Math.random().toFixed(8),
@@ -81,7 +93,7 @@ export const recordsReducer = (state = initialState, action) => {
             list: [...state.list, newRecord],
         };
     }
-    case actions.FORM_CLOSE:
+    case FORM_CLOSE:
         return {
             ...state,
             showForm: false,
@@ -92,21 +104,21 @@ export const recordsReducer = (state = initialState, action) => {
                 tags: [],
             },
         };
-    case actions.UPDATE_LIST: {
+    case UPDATE_LIST: {
         return {
             ...state,
             lastUpdate: action.payload.time,
             loading: true,
         };
     }
-    case actions.FORM_OPEN:
+    case FORM_OPEN:
         return {
             ...state,
             formMode: "add",
             showForm: true,
             newRecord: { ...state.newRecord, type: action.payload.type },
         };
-    case actions.RECORD_DELETE: {
+    case RECORD_DELETE: {
         const { id } = action.payload;
         return {
             ...state,
@@ -114,7 +126,7 @@ export const recordsReducer = (state = initialState, action) => {
         };
     }
 
-    case actions.RECORDS_LIST_SEARCH: {
+    case RECORDS_LIST_SEARCH: {
         return {
             ...state,
             searchQuery: action.payload.query,

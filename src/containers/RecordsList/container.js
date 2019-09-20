@@ -1,16 +1,17 @@
 import React, { useEffect } from "react";
 import cx from "classnames";
-import { Empty } from "antd";
 import { connect } from "react-redux";
+import Empty from "antd/es/empty";
 
 import { Record } from "../../components/Record/component";
 import {
-    editRecordAction,
-    updateStoreAsyncAction,
     deleteRecordAsyncAction,
+    editRecordAction,
     toggleRecordStatusAsyncAction,
+    updateStoreAsyncAction,
 } from "../../actions/actions";
 import "./styles.scss";
+
 import { filter } from "../../selectors/records";
 
 const RecordsList = (props) => {
