@@ -6,7 +6,6 @@ import Drawer from "antd/es/drawer";
 
 import "./styles.scss";
 
-
 export const RecordCreateForm = (props) => {
     const {
         onCreate,
@@ -17,9 +16,9 @@ export const RecordCreateForm = (props) => {
         formMode,
         type,
     } = props;
+    const [form] = Form.useForm();
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
+    const handleSubmit = () => {
         onCreate(newRecordData);
     };
 
@@ -27,15 +26,26 @@ export const RecordCreateForm = (props) => {
         <Drawer
             title={formMode === "edit" ? "Edit record" : `Add new ${type}`}
             placement="bottom"
-            height={400}
+            height={220}
+            width={500}
             visible={visible}
             onClose={closeForm}
         >
             <Form
-                onSubmit={handleSubmit}
+                onFinish={handleSubmit}
+                form={form}
             >
-                {children}
-                <Button className="button-save" type="primary" htmlType="submit" block disabled={!newRecordData.title}>Save</Button>
+                <div className="items">
+
+                    {/* <TextArea value={value} onChange={handleInput} autosize /> */}
+                    {/* <InputDescription /> */}
+                    {children}
+                </div>
+
+                <button className="button-save" type="primary" htmltype="submit" disabled={!newRecordData.title}>
+                    {"Save "}
+                    {type}
+                </button>
             </Form>
         </Drawer>
     );

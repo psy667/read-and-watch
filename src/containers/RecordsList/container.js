@@ -2,8 +2,10 @@ import React, { useEffect } from "react";
 import cx from "classnames";
 import { connect } from "react-redux";
 import Empty from "antd/es/empty";
+import { Modal } from "antd";
 
 import { Record } from "../../components/Record/component";
+
 import {
     deleteRecordAsyncAction,
     editRecordAction,
@@ -13,6 +15,9 @@ import {
 import "./styles.scss";
 
 import { filter } from "../../selectors/records";
+
+const { confirm } = Modal;
+
 
 const RecordsList = (props) => {
     const {
@@ -26,6 +31,17 @@ const RecordsList = (props) => {
         lastUpdate,
     } = props;
 
+    const confirmDelete = (id) => {
+        confirm({
+            title: "Are you sure to delete this item?",
+            content: ("This action cannot be undone."),
+            cancelText: "No",
+            okType: "danger",
+            onOk() {
+                deleteRecord(id);
+            },
+        });
+    };
 
     useEffect(() => {
         updateStore();
@@ -33,7 +49,7 @@ const RecordsList = (props) => {
     }, [lastUpdate, updateStore]);
 
     const handleDeleteRecord = (id) => {
-        deleteRecord(id);
+        confirmDelete(id);
     };
 
     const handleToggleStatus = (record) => {

@@ -14,7 +14,7 @@ export const InputDescription = (props) => {
     const handleInput = (e) => onChange(e.target.value);
 
     return (
-        <Form.Item label="Description">
+        <Form.Item className="description" label="Description" name="description">
             <TextArea value={value} onChange={handleInput} autosize />
         </Form.Item>
     );

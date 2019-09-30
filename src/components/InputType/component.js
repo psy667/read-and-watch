@@ -14,7 +14,7 @@ export const InputType = (props) => {
 
     return (
         <div className="input-type">
-            <Form.Item>
+            <Form.Item name="type" className="type">
                 <Radio.Group onChange={handleInput} defaultValue={value} buttonStyle="solid">
                     <Radio.Button value="book">Book</Radio.Button>
                     <Radio.Button value="article">Article</Radio.Button>

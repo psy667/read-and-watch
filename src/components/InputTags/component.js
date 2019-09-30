@@ -16,11 +16,11 @@ export const InputTags = (props) => {
     const handleInput = (e) => onChange(e);
 
     return (
-        <Form.Item label="Tags">
+        <Form.Item name="tags" className="tags">
             <Select
                 mode="tags"
                 style={{ width: "100%" }}
-                placeholder="Please select"
+                placeholder="Add some tags"
                 onChange={handleInput}
                 value={value}
             >

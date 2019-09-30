@@ -99,3 +99,18 @@
         opacity: 0.5;
     }
 }
+
+
+.icon-edit, .icon-close{
+    width: 20px;
+    height: 20px;
+    padding: 2px;
+    background-size: 16px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url("./assets/icon-edit.svg");
+}
+
+.icon-close{
+    background-image: url("./assets/icon-close.svg");
+}

@@ -54,14 +54,22 @@ const RecordCreate = (props) => {
                 formMode={formMode}
                 type={newRecord.type}
             >
-                { formMode === "edit" && <InputType value={newRecord.type} onChange={(value) => setValueNewRecord("type", value)} /> }
-                {
-                    ["video", "article"].includes(newRecord.type)
-                        ? <InputLink value={newRecord.link} onChange={(value) => setValueNewRecord("link", value)} />
-                        : null
-                }
+                {/* { formMode === "edit" && <InputType value={newRecord.type} onChange={(value) => setValueNewRecord("type", value)} /> } */}
+                {/* { */}
+                {/*    ["video", "article"].includes(newRecord.type) */}
+                {/*        ? <InputLink value={newRecord.link} onChange={(value) => setValueNewRecord("link", value)} /> */}
+                {/*        : null */}
+                {/* } */}
                 <InputTitle value={newRecord.title} type={newRecord.type} onChange={(value) => setValueNewRecord("title", value)} />
-                <InputDescription value={newRecord.description} onChange={(value) => setValueNewRecord("description", value)} />
+
+
+                <textarea
+                    className="description"
+                    placeholder="Add details"
+                    value={newRecord.description}
+                    onChange={(event) => setValueNewRecord("description", event.target.value)}
+                />
+                {/* <InputDescription value={newRecord.description} onChange={(value) => setValueNewRecord("description", value)} /> */}
                 <InputTags value={newRecord.tags} onChange={(value) => setValueNewRecord("tags", value)}>
                     {tags}
                 </InputTags>

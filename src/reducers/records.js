@@ -18,7 +18,7 @@ const initialState = {
     list: [
     ],
     newRecord: {
-        title: null,
+        title: "",
         description: "",
         type: "book",
         tags: [],

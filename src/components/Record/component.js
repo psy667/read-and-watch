@@ -7,6 +7,8 @@ import Typography from "antd/es/typography";
 import Tag from "antd/es/tag";
 import Button from "antd/es/button";
 
+// import SmileOutline from "antd/icons/SmileOutline";
+
 const { Text, Title } = Typography;
 
 export const Record = (props) => {
@@ -43,8 +45,8 @@ export const Record = (props) => {
 
                 </div>
                 <div className="button-wrapper">
-                    <Button type="normal" shape="circle" icon="edit" size="small" onClick={showFullInfo ? onEdit : () => null} />
-                    <Button type="normal" shape="circle" icon="close" size="small" onClick={showFullInfo ? onDelete : () => null} />
+                    <Button type="normal" shape="circle" icon={<span className="icon-edit" />} size="small" onClick={showFullInfo ? onEdit : () => null} />
+                    <Button type="normal" shape="circle" icon={<span className="icon-close" />} size="small" onClick={showFullInfo ? onDelete : () => null} />
                 </div>
 
 

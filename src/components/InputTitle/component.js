@@ -103,19 +103,27 @@ export const InputTitle = (props) => {
     }
 
     return (
-        <Form.Item label="Title">
-            <AutoComplete
-                onSelect={handleInput}
-                dataSource={suggestList}
+        <AutoComplete
+            onSelect={handleInput}
+            dataSource={suggestList}
+            value={inputValue}
+            placeholder="New record"
+            className="title"
+            autoFocus
+        >
+            {/* <Input */}
+            {/*    value={inputValue} */}
+            {/*    onInput={handleInput} */}
+            {/*    onBlur={handleBlur} */}
+            {/*    allowClear */}
+            {/* /> */}
+            <input
+                className="title"
                 value={inputValue}
-            >
-                <Input
-                    value={inputValue}
-                    onInput={handleInput}
-                    onBlur={handleBlur}
-                    allowClear
-                />
-            </AutoComplete>
-        </Form.Item>
+                onBlur={handleBlur}
+                onChange={handleInput}
+                // onChange={(value) => setValueNewRecord("title", value)}
+            />
+        </AutoComplete>
     );
 };
