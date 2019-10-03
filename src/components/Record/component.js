@@ -35,13 +35,13 @@ export const Record = (props) => {
     return (
         <Card
             className={cx("record", { "full-info": showFullInfo, uploading })}
-            onMouseEnter={() => setShowMode(true)}
-            onMouseLeave={() => setShowMode(false)}
+            // onMouseEnter={() => setShowMode(true)}
+            // onMouseLeave={() => setShowMode(false)}
         >
 
             <div className="header">
                 <div className="tag-wrapper">
-                    <Text className="date" type="secondary">{getDateString(date)}</Text>
+                    {/*<Text className="date" type="secondary">{getDateString(date)}</Text>*/}
 
                 </div>
                 <div className="button-wrapper">
