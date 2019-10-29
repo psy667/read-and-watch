@@ -60,8 +60,10 @@ const RecordCreate = (props) => {
                         ? <InputLink value={newRecord.link} onChange={(value) => setValueNewRecord("link", value)} />
                         : null
                 }
-                <InputTitle value={newRecord.title} type={newRecord.type} onChange={(value) => setValueNewRecord("title", value)} />
 
+                <InputTitle value={newRecord.title} type={newRecord.type} onChange={(value) => setValueNewRecord("title", value)} />
+                <InputLink value={newRecord.link} onChange={(value) => setValueNewRecord("link", value)} />
+                dfsfsdf
 
                 <textarea
                     className="description"

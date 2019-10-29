@@ -41,12 +41,12 @@ export const Record = (props) => {
 
             <div className="header">
                 <div className="tag-wrapper">
-                    {/*<Text className="date" type="secondary">{getDateString(date)}</Text>*/}
+                    {/* <Text className="date" type="secondary">{getDateString(date)}</Text> */}
 
                 </div>
                 <div className="button-wrapper">
-                    <Button type="normal" shape="circle" icon={<span className="icon-edit" />} size="small" onClick={showFullInfo ? onEdit : () => null} />
-                    <Button type="normal" shape="circle" icon={<span className="icon-close" />} size="small" onClick={showFullInfo ? onDelete : () => null} />
+                    <Button type="normal" shape="circle" icon={<span className="icon-edit" />} size="small" onClick={onEdit} />
+                    <Button type="normal" shape="circle" icon={<span className="icon-close" />} size="small" onClick={onDelete} />
                 </div>
 
 

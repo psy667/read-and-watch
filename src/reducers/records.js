@@ -97,12 +97,7 @@ export const recordsReducer = (state = initialState, action) => {
         return {
             ...state,
             showForm: false,
-            newRecord: {
-                title: null,
-                description: "",
-                type: "book",
-                tags: [],
-            },
+
         };
     case UPDATE_LIST: {
         return {
@@ -116,7 +111,13 @@ export const recordsReducer = (state = initialState, action) => {
             ...state,
             formMode: "add",
             showForm: true,
-            newRecord: { ...state.newRecord, type: action.payload.type },
+            newRecord: {
+                title: null,
+                description: "",
+                type: "book",
+                tags: [],
+            },
+            // newRecord: { ...state.newRecord, type: action.payload.type },
         };
     case RECORD_DELETE: {
         const { id } = action.payload;

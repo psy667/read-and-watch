@@ -44,8 +44,7 @@ export const InputLink = (props) => {
     };
 
     return (
-        <Form.Item name="link" label="Link" validateStatus={link.validateStatus} help={link.errorMsg}>
-            <Input value={value} onChange={handleInput} />
-        </Form.Item>
+        <input value={value} onChange={handleInput} />
     );
 };
+// {/*<Form.Item name="link" label="Link" validateStatus={link.validateStatus} help={link.errorMsg}>*/}

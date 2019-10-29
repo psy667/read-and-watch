@@ -14,7 +14,7 @@ import {
 } from "../../actions/actions";
 import "./styles.scss";
 
-import { filter } from "../../selectors/records";
+import { filter, sort } from "../../selectors/records";
 
 const { confirm } = Modal;
 
@@ -85,7 +85,7 @@ const RecordsList = (props) => {
 };
 
 const mapStateToProps = (store) => ({
-    records: filter(store),
+    records: sort(filter(store)),
     showForm: store.records.showForm,
     loading: store.records.loading,
     lastUpdate: store.records.lastUpdate,

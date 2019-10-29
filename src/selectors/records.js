@@ -24,3 +24,16 @@ export const filter = (state) => {
         && filterByType(item, selectedType)
     ));
 };
+
+export const sort = (list) => list.slice().sort((a, b) => {
+    if (a.status === b.status) {
+        if (a.title > b.title) {
+            return 1;
+        }
+        return -1;
+    }
+    if (a.status > b.status) {
+        return -1;
+    }
+    return 1;
+});
