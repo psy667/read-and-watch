@@ -44,7 +44,11 @@ export const InputLink = (props) => {
     };
 
     return (
-        <input value={value} onChange={handleInput} />
+        <input
+            value={value || ""}
+            onChange={handleInput}
+            placeholder="Add the link"
+        />
     );
 };
 // {/*<Form.Item name="link" label="Link" validateStatus={link.validateStatus} help={link.errorMsg}>*/}

@@ -5,6 +5,7 @@ import Form from "antd/es/form";
 import AutoComplete from "antd/es/auto-complete";
 
 import "./styles.scss";
+import { RecordCreateForm } from "../RecordCreateForm/component";
 
 const jsonp = require("jsonp");
 
@@ -98,32 +99,34 @@ export const InputTitle = (props) => {
         setIdTimeout(id);
     }
 
-    function handleBlur() {
-        onChange(inputValue);
+    function handleBlur(v) {
+        onChange(v);
     }
 
     return (
-        <AutoComplete
-            onSelect={handleInput}
-            dataSource={suggestList}
-            value={inputValue}
-            placeholder="New record"
+        <input
             className="title"
-            autoFocus
-        >
-            {/* <Input */}
-            {/*    value={inputValue} */}
-            {/*    onInput={handleInput} */}
-            {/*    onBlur={handleBlur} */}
-            {/*    allowClear */}
-            {/* /> */}
-            <input
-                className="title"
-                value={inputValue}
-                onBlur={handleBlur}
-                onChange={handleInput}
-                // onChange={(value) => setValueNewRecord("title", value)}
-            />
-        </AutoComplete>
+            value={inputValue}
+            placeholder="Add title"
+            onChange={(e) => setInputValue(e.target.value)}
+            onBlur={(e) => handleBlur(e.target.value)}
+        />
+
     );
 };
+{ /* <AutoComplete */ }
+{ /*    onSelect={handleInput} */ }
+{ /*    dataSource={suggestList} */ }
+{ /*    value={value} */ }
+{ /*    placeholder="New record" */ }
+{ /*    className="title" */ }
+{ /*    autoFocus */ }
+{ /* > */ }
+{ /*    /!* <Input *!/ */ }
+{ /*    /!*    value={inputValue} *!/ */ }
+{ /*    /!*    onInput={handleInput} *!/ */ }
+{ /*    /!*    onBlur={handleBlur} *!/ */ }
+{ /*    /!*    allowClear *!/ */ }
+{ /*    /!* /> *!/ */ }
+{ /*    */ }
+{ /* </AutoComplete> */ }

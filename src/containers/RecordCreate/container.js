@@ -32,10 +32,16 @@ const RecordCreate = (props) => {
         formMode,
         selectedType,
     } = props;
-
+    console.log(newRecord);
     const addRecordToDB = (record) => {
         addRecord(record);
     };
+
+    const {
+        title,
+        description,
+        link,
+    } = newRecord;
 
     return (
         <div className="create-record">
@@ -61,12 +67,17 @@ const RecordCreate = (props) => {
                         : null
                 }
                 <InputTitle value={newRecord.title} type={newRecord.type} onChange={(value) => setValueNewRecord("title", value)} />
-
+                {/* <input */}
+                {/*    className="title" */}
+                {/*    value={title} */}
+                {/*    placeholder="Add title" */}
+                {/*    onChange={(e) => setValueNewRecord("title", e.target.value)} */}
+                {/* /> */}
 
                 <textarea
                     className="description"
                     placeholder="Add details"
-                    value={newRecord.description}
+                    value={description}
                     onChange={(event) => setValueNewRecord("description", event.target.value)}
                 />
                 {/* <InputDescription value={newRecord.description} onChange={(value) => setValueNewRecord("description", value)} /> */}

@@ -22,6 +22,7 @@ const initialState = {
         description: "",
         type: "book",
         tags: [],
+        link: "",
     },
     showForm: false,
     loading: true,
@@ -112,10 +113,11 @@ export const recordsReducer = (state = initialState, action) => {
             formMode: "add",
             showForm: true,
             newRecord: {
-                title: null,
+                title: "",
                 description: "",
-                type: "book",
+                type: action.payload.type,
                 tags: [],
+                link: "",
             },
             // newRecord: { ...state.newRecord, type: action.payload.type },
         };
