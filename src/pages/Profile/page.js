@@ -11,8 +11,6 @@ function ProfileContainer() {
 
 const mapStateToProps = (state) => state;
 
-const actionCreators = {
-
-};
+const actionCreators = {};
 
 export const Profile = connect(mapStateToProps, actionCreators)(ProfileContainer);

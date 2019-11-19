@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import cx from "classnames";
 import { connect } from "react-redux";
 import Empty from "antd/es/empty";
-import { Modal } from "antd";
 
 import { Record } from "../../components/Record/component";
 
@@ -16,41 +15,23 @@ import "./styles.scss";
 
 import { filter, sort } from "../../selectors/records";
 
-const { confirm } = Modal;
-
 
 const RecordsList = (props) => {
     const {
         editRecord,
         updateStore,
         toggleRecordStatus,
-        deleteRecord,
         records,
         showForm,
         loading,
         lastUpdate,
     } = props;
 
-    const confirmDelete = (id) => {
-        confirm({
-            title: "Are you sure to delete this item?",
-            content: ("This action cannot be undone."),
-            cancelText: "No",
-            okType: "danger",
-            onOk() {
-                deleteRecord(id);
-            },
-        });
-    };
-
     useEffect(() => {
         updateStore();
         return (n) => n;
     }, [lastUpdate, updateStore]);
 
-    const handleDeleteRecord = (id) => {
-        confirmDelete(id);
-    };
 
     const handleToggleStatus = (record) => {
         toggleRecordStatus(record);
@@ -70,7 +51,6 @@ const RecordsList = (props) => {
                         link={item.link}
                         status={item.status}
                         onStatusChange={() => handleToggleStatus(item)}
-                        onDelete={() => handleDeleteRecord(item.id)}
                         onEdit={() => editRecord(item)}
                         uploading={item.uploading}
                     />
@@ -78,7 +58,7 @@ const RecordsList = (props) => {
             }
             {
                 records.length === 0 && !loading
-                && <Empty />
+                && <Empty/>
             }
         </div>
     );

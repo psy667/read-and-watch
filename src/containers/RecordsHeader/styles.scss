@@ -1,68 +1,80 @@
-.records-header{
-    padding: 8px 8px;
-    top: 0;
+.records-header {
+  padding: 8px 8px;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10;
+  background: #A08BD3;
+  padding-top: 16px;
+  border-radius: 0 0 8px 8px;
+
+  &.show-form {
+    filter: blur(5px);
+  }
+
+  .ant-input-search {
+    flex: 1;
+    margin-right: 10px;
+    height: 36px;
+
+    input {
+      opacity: 0.8;
+      border-radius: 50px;
+
+      &:hover {
+        opacity: 1;
+        border: 0 !important;
+      }
+
+      &:focus {
+        border: 0;
+        outline: 0;
+      }
+    }
+  }
+
+  .ant-avatar {
+    width: 36px;
+    height: 36px;
+  }
+
+  .wrapper {
+    display: flex;
+  }
+
+  .ant-progress {
+    position: absolute;
+    margin-top: -24px;
     left: 0;
-    width: 100%;
-    z-index: 10;
-    background: #A08BD3;
-    padding-top: 16px;
-    border-radius: 0 0 8px 8px;
 
-    &.show-form{
-        filter: blur(5px);
+    .ant-progress-inner {
+      background-color: transparent;
     }
-    .ant-input-search{
-        flex: 1;
-        margin-right: 10px;
-        height: 36px;
-        input{
-            opacity: 0.8;
-            border-radius: 50px;
-            &:hover{
-                opacity: 1;
-                border: 0 !important;
-            }
-            &:focus{
-                border: 0;
-                outline: 0;
-            }
-        }
-    }
-    .ant-avatar{
-        width: 36px;
-        height: 36px;
-    }
-    .wrapper{
-        display: flex;
-    }
-    .ant-progress{
-        position: absolute;
-        margin-top: -24px;
-        left: 0;
-        .ant-progress-inner{
-            background-color: transparent;
-        }
-        .ant-progress-bg{
-            height: 4px !important;
-            background-color: transparent;
 
-        }
+    .ant-progress-bg {
+      height: 4px !important;
+      background-color: transparent;
+
     }
-    .tabs{
-        display: flex;
-        justify-content: space-around;
-        color: #fff9;
-        margin-top: 8px;
-        div{
-            padding: 4px 8px;
-            flex: 1;
-            text-align: center;
-        }
-        .active{
-            color: #fff;
-            //text-decoration: underline;
-            background-color: #fff3;
-            border-radius: 50px;
-        }
+  }
+
+  .tabs {
+    display: flex;
+    justify-content: space-around;
+    color: #fff9;
+    margin-top: 8px;
+
+    div {
+      padding: 4px 8px;
+      flex: 1;
+      text-align: center;
     }
+
+    .active {
+      color: #fff;
+      //text-decoration: underline;
+      background-color: #fff3;
+      border-radius: 50px;
+    }
+  }
 }

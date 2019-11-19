@@ -1,34 +1,37 @@
-.record-list{
-    background: #E6E8F1;
-    //padding: 10px;
-    overflow: scroll;
-    overflow-x: hidden;
+.record-list {
+  background: #E6E8F1;
+  //padding: 10px;
+  overflow: scroll;
+  overflow-x: hidden;
+  width: 100%;
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+
+  .record {
     width: 100%;
-    flex: 1;
-    display: flex;
-    flex-wrap: wrap;
-    align-content: flex-start;
+    //margin: 5px;
+    @media(min-width: 700px) {
+      width: calc(50% - 10px);
+    }
+    @media(min-width: 1500px) {
+      width: calc(33.3% - 10px);
+    }
+    @media(min-width: 1900px) {
+      width: calc(25% - 10px);
+    }
 
-    .record{
-        width: 100%;
-        //margin: 5px;
-        @media(min-width: 700px){
-            width: calc(50% - 10px);
-        }
-        @media(min-width: 1500px){
-            width: calc(33.3% - 10px);
-        }
-        @media(min-width: 1900px){
-            width: calc(25% - 10px);
-        }
-        &:last-child{
-            margin-bottom: 60px;
-        }
+    &:last-child {
+      margin-bottom: 60px;
     }
-    &.show-form{
-        filter: blur(10px);
-    }
-    .records-list-progress{
+  }
 
-    }
+  &.show-form {
+    filter: blur(10px);
+  }
+
+  .records-list-progress {
+
+  }
 }

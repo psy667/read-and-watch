@@ -2,23 +2,25 @@ import React from "react";
 
 import { connect } from "react-redux";
 
+import "./styles.scss";
+import Button from "antd/es/button";
+
+import { Modal } from "antd";
+import Form from "antd/es/form";
+import Drawer from "antd/es/drawer";
+import { InputTags } from "../../components/InputTags/component";
+import { InputTitle } from "../../components/InputTitle/component";
 import {
     addRecordAsyncAction,
     closeFormAction,
+    deleteRecordAsyncAction,
     openFormAction,
     setNewRecordsListAction,
     setNewTagsListAction,
     setValueNewRecordAction,
 } from "../../actions/actions";
-import "./styles.scss";
 
-import { InputType } from "../../components/InputType/component";
-import { InputTitle } from "../../components/InputTitle/component";
-import { InputDescription } from "../../components/InputDescription/component";
-import { InputLink } from "../../components/InputLink/component";
-import { InputTags } from "../../components/InputTags/component";
-import { RecordCreateForm } from "../../components/RecordCreateForm/component";
-
+const { confirm } = Modal;
 
 const RecordCreate = (props) => {
     const {
@@ -31,17 +33,34 @@ const RecordCreate = (props) => {
         addRecord,
         formMode,
         selectedType,
+        deleteRecord,
     } = props;
-    console.log(newRecord);
+
     const addRecordToDB = (record) => {
         addRecord(record);
     };
 
-    const {
-        title,
-        description,
-        link,
-    } = newRecord;
+    const confirmDelete = (id) => {
+        confirm({
+            title: "Are you sure to delete this item?",
+            content: ("This action cannot be undone."),
+            cancelText: "No",
+            okType: "danger",
+            onOk() {
+                deleteRecord(id);
+            },
+        });
+    };
+
+    const handleDeleteRecord = (id) => {
+        confirmDelete(id);
+    };
+
+    const [form] = Form.useForm();
+
+    const handleSubmit = () => {
+        addRecordToDB(newRecord);
+    };
 
     return (
         <div className="create-record">
@@ -51,40 +70,57 @@ const RecordCreate = (props) => {
                     onClick={() => openForm(selectedType)}
                 />
             </div>
-
-            <RecordCreateForm
-                newRecordData={newRecord}
-                onCreate={addRecordToDB}
+            <Drawer
+                title={formMode === "edit" ? "Edit record" : `Add new ${newRecord.type}`}
+                placement="bottom"
+                height={220}
+                width={500}
                 visible={showForm}
-                closeForm={closeForm}
-                formMode={formMode}
-                type={newRecord.type}
+                onClose={closeForm}
             >
-                {/* { formMode === "edit" && <InputType value={newRecord.type} onChange={(value) => setValueNewRecord("type", value)} /> } */}
-                {
-                    ["video", "article"].includes(newRecord.type)
-                        ? <InputLink value={newRecord.link} onChange={(value) => setValueNewRecord("link", value)} />
-                        : null
-                }
-                <InputTitle value={newRecord.title} type={newRecord.type} onChange={(value) => setValueNewRecord("title", value)} />
-                {/* <input */}
-                {/*    className="title" */}
-                {/*    value={title} */}
-                {/*    placeholder="Add title" */}
-                {/*    onChange={(e) => setValueNewRecord("title", e.target.value)} */}
-                {/* /> */}
+                <Form
+                    onFinish={handleSubmit}
+                    form={form}
+                >
+                    <div className="items">
+                        {newRecord.id && (
+                            <Button
+                                className="delete-button"
+                                type="normal"
+                                shape="circle"
+                                icon={<span className="icon-delete"/>}
+                                size="small"
+                                onClick={() => handleDeleteRecord(newRecord.id)}
+                            />
+                        )}
 
-                <textarea
-                    className="description"
-                    placeholder="Add details"
-                    value={description}
-                    onChange={(event) => setValueNewRecord("description", event.target.value)}
-                />
-                {/* <InputDescription value={newRecord.description} onChange={(value) => setValueNewRecord("description", value)} /> */}
-                <InputTags value={newRecord.tags} onChange={(value) => setValueNewRecord("tags", value)}>
-                    {tags}
-                </InputTags>
-            </RecordCreateForm>
+                        <InputTitle
+                            value={newRecord.title}
+                            type={newRecord.type}
+                            onChangeTitle={(value) => setValueNewRecord("title", value)}
+                            onChangeDescription={(value) => setValueNewRecord("description", value)}
+                        />
+
+                        <textarea
+                            className="description"
+                            placeholder="Add details"
+                            value={newRecord.description}
+                            onChange={(event) => setValueNewRecord("description", event.target.value)}
+                        />
+
+                        <InputTags value={newRecord.tags}
+                                   onChange={(value) => setValueNewRecord("tags", value)}>
+                            {tags}
+                        </InputTags>
+                    </div>
+
+                    <button className="button-save" type="primary" htmltype="submit"
+                            disabled={!newRecord.title}>
+                        {"Save "}
+                        {newRecord.type}
+                    </button>
+                </Form>
+            </Drawer>
         </div>
 
     );
@@ -105,6 +141,8 @@ const actions = {
     setNewRecordsList: setNewRecordsListAction,
     setNewTagsList: setNewTagsListAction,
     addRecord: addRecordAsyncAction,
+    deleteRecord: deleteRecordAsyncAction,
+
 };
 
 export const RecordCreateContainer = connect(mapStateToProps, actions)(RecordCreate);

@@ -27,12 +27,13 @@ const RecordsHeader = (props) => {
     const { photoURL, displayName } = auth().currentUser || {};
     return (
         <div className={cx("records-header", { "show-form": showForm })}>
-            <Progress percent={100} size="small" status={loading ? "active" : "normal"} showInfo={false} />
+            <Progress percent={100} size="small" status={loading ? "active" : "normal"}
+                      showInfo={false}/>
 
             <div className="wrapper">
-                <Search placeholder="Search by title or tags" allowClear onChange={handleInput} />
+                <Search placeholder="Search by title or tags" allowClear onChange={handleInput}/>
                 <Tooltip title={displayName} placement="bottomRight">
-                    <Avatar src={photoURL} />
+                    <Avatar src={photoURL}/>
                 </Tooltip>
             </div>
             <div className="tabs">

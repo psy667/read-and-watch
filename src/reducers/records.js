@@ -15,8 +15,7 @@ import {
 } from "../actions/actionTypes";
 
 const initialState = {
-    list: [
-    ],
+    list: [],
     newRecord: {
         title: "",
         description: "",
@@ -47,7 +46,10 @@ export const recordsReducer = (state = initialState, action) => {
 
         const list = state.list.map((item) => {
             if (item.id === id) {
-                return { ...item, status: status === "complete" ? "incomplete" : "complete" };
+                return {
+                    ...item,
+                    status: status === "complete" ? "incomplete" : "complete"
+                };
             }
             return item;
         });
@@ -62,7 +64,10 @@ export const recordsReducer = (state = initialState, action) => {
         if (["title", "description", "type", "tags", "link"].includes(key)) {
             return {
                 ...state,
-                newRecord: { ...state.newRecord, [key]: value },
+                newRecord: {
+                    ...state.newRecord,
+                    [key]: value
+                },
             };
         }
         return state;
@@ -84,7 +89,8 @@ export const recordsReducer = (state = initialState, action) => {
     case RECORD_CREATE: {
         const newRecord = {
             ...state.newRecord,
-            id: Math.random().toFixed(8),
+            id: Math.random()
+                .toFixed(8),
             date: new Date().getTime(),
             status: "incomplete",
             uploading: true,
@@ -119,12 +125,12 @@ export const recordsReducer = (state = initialState, action) => {
                 tags: [],
                 link: "",
             },
-            // newRecord: { ...state.newRecord, type: action.payload.type },
         };
     case RECORD_DELETE: {
         const { id } = action.payload;
         return {
             ...state,
+            showForm: false,
             list: state.list.filter((item) => item.id !== id),
         };
     }

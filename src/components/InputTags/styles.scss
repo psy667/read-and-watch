@@ -1,20 +1,25 @@
-.ant-form-item{
+.ant-form-item {
   margin: 0;
-  .ant-select-selector{
+
+  .ant-select-selector {
     border: 0;
-    .ant-select-focused{
+
+    .ant-select-focused {
       outline: 0;
       border: 0;
     }
-    .ant-select-selection-item{
+
+    .ant-select-selection-item {
       //background: #A08BD3;
       border-radius: 4px;
     }
-    .ant-select-selection-placeholder{
+
+    .ant-select-selection-placeholder {
       left: 0;
       opacity: 1;
       color: #747474;
     }
   }
 }
+
 //#c5adff

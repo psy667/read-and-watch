@@ -7,9 +7,9 @@ import { RecordsHeaderContainer } from "../../containers/RecordsHeader/container
 function Main() {
     return (
         <>
-            <RecordsHeaderContainer />
-            <RecordsListContainer />
-            <RecordCreateContainer />
+            <RecordsHeaderContainer/>
+            <RecordsListContainer/>
+            <RecordCreateContainer/>
         </>
     );
 }

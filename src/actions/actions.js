@@ -1,21 +1,21 @@
 import {
-    RECORDS_LIST_SEARCH,
-    RECORDS_LIST_SET_STATUS,
-    RECORD_CREATE,
-    RECORD_CREATE_SET_VALUE,
     FORM_CLOSE,
     FORM_OPEN,
-    RECORDS_LIST_UPDATE,
-    RECORD_EDIT,
-    TAGS_LIST_UPDATE,
     LOADING_SET,
+    RECORD_CREATE,
+    RECORD_CREATE_SET_VALUE,
+    RECORD_DELETE,
+    RECORD_EDIT,
+    RECORDS_LIST_FILTER_BY_STATUS,
+    RECORDS_LIST_FILTER_BY_TYPE,
+    RECORDS_LIST_SEARCH,
+    RECORDS_LIST_SET_STATUS,
+    RECORDS_LIST_UPDATE,
+    TAGS_LIST_UPDATE,
     UPDATE_LIST,
-    RECORD_DELETE, RECORDS_LIST_FILTER_BY_TYPE, RECORDS_LIST_FILTER_BY_STATUS,
 } from "./actionTypes";
 
-import {
-    getRecords, addRecord, deleteRecord, updateRecord, getTags, addTag,
-} from "../database";
+import { addRecord, addTag, deleteRecord, getRecords, getTags, updateRecord, } from "../database";
 
 export const toggleStatusAction = (record) => ({
     type: RECORDS_LIST_SET_STATUS,
@@ -115,7 +115,10 @@ export const addRecordAsyncAction = (record) => async (dispatch) => {
     dispatch(createRecordAction());
     dispatch(setLoading(true));
     dispatch(closeFormAction());
-    record.tags.map((tag) => addTag({ id: tag, value: tag }));
+    record.tags.map((tag) => addTag({
+        id: tag,
+        value: tag
+    }));
     addRecord(record)
         .then(() => {
             dispatch(updateListAction());
@@ -153,7 +156,10 @@ export const deleteRecordAsyncAction = (id) => async (dispatch) => {
 
 export const toggleRecordStatusAsyncAction = (record) => async (dispatch) => {
     dispatch(toggleStatusAction(record));
-    const updatedRecord = { ...record, status: record.status === "complete" ? "incomplete" : "complete" };
+    const updatedRecord = {
+        ...record,
+        status: record.status === "complete" ? "incomplete" : "complete"
+    };
     updateRecord(updatedRecord)
         .then(() => {
             dispatch(updateListAction());
