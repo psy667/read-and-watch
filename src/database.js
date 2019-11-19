@@ -61,7 +61,7 @@ export const getRecords = async () => {
 
             response.forEach((item) => recordsArray.push({
                 ...item.data(),
-                id: item.id
+                id: item.id,
             }));
 
             return recordsArray;
@@ -83,7 +83,7 @@ export const getTags = async () => {
 
             response.forEach((item) => tagsArray.push({
                 ...item.data(),
-                id: item.id
+                id: item.id,
             }));
 
             return tagsArray;

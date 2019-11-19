@@ -15,7 +15,9 @@ import {
     UPDATE_LIST,
 } from "./actionTypes";
 
-import { addRecord, addTag, deleteRecord, getRecords, getTags, updateRecord, } from "../database";
+import {
+    addRecord, addTag, deleteRecord, getRecords, getTags, updateRecord,
+} from "../database";
 
 export const toggleStatusAction = (record) => ({
     type: RECORDS_LIST_SET_STATUS,
@@ -117,7 +119,7 @@ export const addRecordAsyncAction = (record) => async (dispatch) => {
     dispatch(closeFormAction());
     record.tags.map((tag) => addTag({
         id: tag,
-        value: tag
+        value: tag,
     }));
     addRecord(record)
         .then(() => {
@@ -158,7 +160,7 @@ export const toggleRecordStatusAsyncAction = (record) => async (dispatch) => {
     dispatch(toggleStatusAction(record));
     const updatedRecord = {
         ...record,
-        status: record.status === "complete" ? "incomplete" : "complete"
+        status: record.status === "complete" ? "incomplete" : "complete",
     };
     updateRecord(updatedRecord)
         .then(() => {

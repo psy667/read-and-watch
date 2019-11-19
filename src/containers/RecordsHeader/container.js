@@ -1,6 +1,6 @@
 import React from "react";
 import cx from "classnames";
-import { connect } from "react-redux";
+import { connect, useSelector } from "react-redux";
 
 import "./styles.scss";
 
@@ -25,15 +25,21 @@ const RecordsHeader = (props) => {
         search(e.target.value);
     };
     const { photoURL, displayName } = auth().currentUser || {};
+    const { searchQuery } = useSelector((state) => state.records);
+
     return (
         <div className={cx("records-header", { "show-form": showForm })}>
-            <Progress percent={100} size="small" status={loading ? "active" : "normal"}
-                      showInfo={false}/>
+            <Progress
+                percent={100}
+                size="small"
+                status={loading ? "active" : "normal"}
+                showInfo={false}
+            />
 
             <div className="wrapper">
-                <Search placeholder="Search by title or tags" allowClear onChange={handleInput}/>
+                <Search placeholder="Search by title or tags" allowClear onChange={handleInput} value={searchQuery} />
                 <Tooltip title={displayName} placement="bottomRight">
-                    <Avatar src={photoURL}/>
+                    <Avatar src={photoURL} />
                 </Tooltip>
             </div>
             <div className="tabs">

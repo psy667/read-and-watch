@@ -5,6 +5,8 @@ import "./styles.scss";
 import Card from "antd/es/card";
 import Typography from "antd/es/typography";
 import Tag from "antd/es/tag";
+import { useDispatch } from "react-redux";
+import { searchAction } from "../../actions/actions";
 
 const { Title } = Typography;
 
@@ -30,20 +32,29 @@ export const Record = (props) => {
         window.navigator.vibrate([20, 20, 20]);
         onStatusChange();
     };
+
+    const dispatch = useDispatch();
+
+    const handleSelectTag = (value) => {
+        dispatch(searchAction(value));
+    };
+
     return (
         <Card
             className={cx("record", { uploading })}
         >
 
             <div className="header">
-                <div className="tag-wrapper"/>
-                <div className="button-wrapper"/>
+                <div className="tag-wrapper" />
+                <div className="button-wrapper" />
 
 
             </div>
             <div className="title">
-                <div className={cx("indicator", status === "complete" ? "complete" : "incomplete")}
-                     onClick={handleStatusChange}/>
+                <div
+                    className={cx("indicator", status === "complete" ? "complete" : "incomplete")}
+                    onClick={handleStatusChange}
+                />
                 <Title level={4} onClick={onEdit}>
                     {title}
                 </Title>
@@ -56,7 +67,7 @@ export const Record = (props) => {
             </Linkify>
             <div className="tags">
                 {
-                    tags.map((item) => <Tag key={item}>{item}</Tag>)
+                    tags.map((item) => <Tag key={item} onClick={() => handleSelectTag(item)}>{item}</Tag>)
                 }
             </div>
 

@@ -8,7 +8,7 @@ export default function App() {
     return (
         <div className="app">
             <Router>
-                <Route path="/" exact component={Main}/>
+                <Route path="/" exact component={Main} />
             </Router>
         </div>
     );

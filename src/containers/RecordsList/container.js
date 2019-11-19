@@ -58,7 +58,7 @@ const RecordsList = (props) => {
             }
             {
                 records.length === 0 && !loading
-                && <Empty/>
+                && <Empty />
             }
         </div>
     );

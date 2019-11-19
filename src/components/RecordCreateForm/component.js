@@ -38,8 +38,12 @@ export const RecordCreateForm = (props) => {
                     {children}
                 </div>
 
-                <button className="button-save" type="primary" htmltype="submit"
-                        disabled={!newRecordData.title}>
+                <button
+                    className="button-save"
+                    type="primary"
+                    htmltype="submit"
+                    disabled={!newRecordData.title}
+                >
                     {"Save "}
                     {type}
                 </button>
