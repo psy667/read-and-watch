@@ -43,6 +43,7 @@ export const InputTitle = (props) => {
 
         const { titleValue, titleType } = validateLink(query);
 
+        console.log(titleValue, titleType);
 
         if (titleType === "link") {
             const responseRaw = await axios.get("/api/pageTitle", { params: { url: titleValue } });
@@ -50,7 +51,7 @@ export const InputTitle = (props) => {
             onChangeTitle(title);
             onChangeDescription(titleType);
         } else {
-            onChangeTitle(titleType);
+            onChangeTitle(titleValue);
         }
     };
 
