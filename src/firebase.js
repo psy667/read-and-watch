@@ -36,7 +36,6 @@ firebase.auth()
         }
     });
 
-
 firebase.firestore()
     .settings({
         cacheSizeBytes: firebase.firestore.CACHE_SIZE_UNLIMITED,
@@ -44,6 +43,13 @@ firebase.firestore()
 
 firebase.firestore()
     .enablePersistence();
+
+firebase.firestore().disableNetwork();
+
+setTimeout(() => {
+    firebase.firestore().enableNetwork();
+}, 2000);
+
 
 export const { auth } = firebase;
 export const db = firebase.firestore();

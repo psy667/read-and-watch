@@ -49,7 +49,7 @@ export const InputTitle = (props) => {
             const responseRaw = await axios.get("/api/pageTitle", { params: { url: titleValue } });
             const { title } = responseRaw.data;
             onChangeTitle(title);
-            onChangeDescription(titleType);
+            onChangeDescription(titleValue);
         } else {
             onChangeTitle(titleValue);
         }
