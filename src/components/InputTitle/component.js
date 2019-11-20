@@ -22,8 +22,8 @@ export const InputTitle = (props) => {
                 protocol = "https://";
             }
             return {
-                value: `${protocol}${str}`,
-                type: "link",
+                titleValue: `${protocol}${str}`,
+                titleType: "link",
             };
         }
         return {
