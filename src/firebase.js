@@ -14,9 +14,6 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
-const provider = new firebase.auth.GoogleAuthProvider();
-
-
 firebase.auth()
     .onAuthStateChanged((user) => {
         if (user) {
@@ -25,7 +22,9 @@ firebase.auth()
             firebase.auth()
                 .setPersistence(firebase.auth.Auth.Persistence.LOCAL)
                 .then(() => {
-                    firebase.auth()
+                    const provider = new firebase.auth.GoogleAuthProvider();
+
+                    return firebase.auth()
                         .signInWithPopup(provider);
                 })
                 .catch((error) => {
@@ -35,6 +34,7 @@ firebase.auth()
                 });
         }
     });
+
 
 firebase.firestore()
     .settings({

@@ -6,7 +6,7 @@
   z-index: 10;
   background: #A08BD3;
   padding-top: 16px;
-  border-radius: 0 0 8px 8px;
+  border-radius: 0 0 20px 20px;
 
   &.show-form {
     filter: blur(5px);
@@ -63,6 +63,7 @@
     justify-content: space-around;
     color: #fff9;
     margin-top: 8px;
+    padding: 4px 8px;
 
     div {
       padding: 4px 8px;

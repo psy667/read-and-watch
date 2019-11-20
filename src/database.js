@@ -1,13 +1,52 @@
 import { auth, db } from "./firebase";
+import { setNewRecordsListAction, setNewTagsListAction } from "./actions/actions";
+import { store } from "./store";
 
 let userId = null;
 
-auth()
-    .onAuthStateChanged((user) => {
-        if (user) {
-            userId = user.uid;
-        }
-    });
+export function login() {
+    return new Promise((resolve) => auth()
+        .onAuthStateChanged((user) => {
+            if (user) {
+                userId = user.uid;
+                resolve(userId);
+            }
+        }));
+}
+
+export function recordsSaga(userID) {
+    return new Promise((resolve) => db.collection("users")
+        .doc(userID)
+        .collection("records")
+        .onSnapshot((response) => {
+            const result = [];
+
+            response.forEach((item) => result.push({
+                ...item.data(),
+                id: item.id,
+            }));
+
+            resolve(result);
+            store.dispatch(setNewRecordsListAction(result));
+        }));
+}
+
+export function tagsSaga(userID) {
+    return new Promise((resolve) => db.collection("users")
+        .doc(userID)
+        .collection("tags")
+        .onSnapshot((response) => {
+            const result = [];
+
+            response.forEach((item) => result.push({
+                ...item.data(),
+                id: item.id,
+            }));
+
+            resolve(result);
+            store.dispatch(setNewTagsListAction(result));
+        }));
+}
 
 export const deleteRecord = async (id) => db.collection("users")
     .doc(userId)
@@ -46,27 +85,27 @@ export const addTag = async (tag) => db.collection("users")
     .doc(tag.id)
     .set(tag);
 
-export const getRecords = async () => {
-    if (!userId) {
-        throw Error("no auth");
-    }
-
-    return db.collection("users")
-        .doc(userId)
-        .collection("records")
-        .orderBy("date")
-        .get()
-        .then((response) => {
-            const recordsArray = [];
-
-            response.forEach((item) => recordsArray.push({
-                ...item.data(),
-                id: item.id,
-            }));
-
-            return recordsArray;
-        });
-};
+// export const getRecords = async () => {
+//     if (!userId) {
+//         throw Error("no auth");
+//     }
+//
+//     return db.collection("users")
+//         .doc(userId)
+//         .collection("records")
+//         .orderBy("date")
+//         .get()
+//         .then((response) => {
+//             const recordsArray = [];
+//
+//             response.forEach((item) => recordsArray.push({
+//                 ...item.data(),
+//                 id: item.id,
+//             }));
+//
+//             return recordsArray;
+//         });
+// };
 
 export const getTags = async () => {
     if (!userId) {

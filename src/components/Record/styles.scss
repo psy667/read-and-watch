@@ -39,7 +39,8 @@
   }
 
   .tags {
-    overflow: scroll;
+    overflow-x: scroll;
+    padding-bottom: 4px;
     display: flex;
     padding-top: 4px;
   }

@@ -1,44 +1,91 @@
-import React, { useEffect } from "react";
+import React from "react";
 import cx from "classnames";
-import { connect } from "react-redux";
+import { connect, useDispatch, useSelector } from "react-redux";
 import Empty from "antd/es/empty";
 
 import { Record } from "../../components/Record/component";
 
 import {
     deleteRecordAsyncAction,
-    editRecordAction,
+    editRecordAction, sortByAction,
     toggleRecordStatusAsyncAction,
-    updateStoreAsyncAction,
 } from "../../actions/actions";
 import "./styles.scss";
 
 import { filter, sort } from "../../selectors/records";
+import { Dropdown } from "antd";
+import Menu from "antd/es/menu";
 
 
 const RecordsList = (props) => {
     const {
         editRecord,
-        updateStore,
         toggleRecordStatus,
         records,
         showForm,
         loading,
-        lastUpdate,
     } = props;
-
-    useEffect(() => {
-        updateStore();
-        return (n) => n;
-    }, [lastUpdate, updateStore]);
-
 
     const handleToggleStatus = (record) => {
         toggleRecordStatus(record);
     };
 
+    const dispatch = useDispatch();
+    const sortKey = useSelector((state) => state.records.sortKey);
+
+    const handleSortBy = (key) => {
+        dispatch(sortByAction(key));
+    };
+
+    const menu = (
+        <Menu>
+            <Menu.Item>
+                <button
+                    className="link"
+                    onClick={() => handleSortBy("title")}
+                >
+                    Title (alphabetically)
+                </button>
+            </Menu.Item>
+            <Menu.Item>
+                <button
+                    className="link"
+                    onClick={() => handleSortBy("date")}
+                >
+                    Date (from new to old)
+                </button>
+            </Menu.Item>
+            <Menu.Item>
+                <button
+                    className="link"
+                    onClick={() => handleSortBy("status")}
+                >
+                    Status (incomplete first)
+                </button>
+            </Menu.Item>
+        </Menu>
+    );
+
+
     return (
         <div className={cx("record-list", { "show-form": showForm })}>
+            <div className="sort">
+                <div className="counter">
+                    <b>{records.length}</b>
+                    {" "}
+records
+
+                </div>
+                <Dropdown overlay={menu}>
+                    <span>
+                        Sort by:
+                        {" "}
+                        <button className="link">
+                            {sortKey}
+                        </button>
+                    </span>
+                </Dropdown>
+            </div>
             {
                 records.map((item) => (
                     <Record
@@ -65,7 +112,7 @@ const RecordsList = (props) => {
 };
 
 const mapStateToProps = (store) => ({
-    records: sort(filter(store)),
+    records: sort(store, filter(store)),
     showForm: store.records.showForm,
     loading: store.records.loading,
     lastUpdate: store.records.lastUpdate,
@@ -73,7 +120,6 @@ const mapStateToProps = (store) => ({
 
 const actions = {
     editRecord: editRecordAction,
-    updateStore: updateStoreAsyncAction,
     toggleRecordStatus: toggleRecordStatusAsyncAction,
     deleteRecord: deleteRecordAsyncAction,
 };

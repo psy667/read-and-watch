@@ -1,7 +1,7 @@
 import {
     FORM_CLOSE,
     FORM_OPEN,
-    LOADING_SET,
+    LOADING_SET, LOGIN,
     RECORD_CREATE,
     RECORD_CREATE_SET_VALUE,
     RECORD_DELETE,
@@ -9,7 +9,7 @@ import {
     RECORDS_LIST_FILTER_BY_STATUS,
     RECORDS_LIST_FILTER_BY_TYPE,
     RECORDS_LIST_SEARCH,
-    RECORDS_LIST_SET_STATUS,
+    RECORDS_LIST_SET_STATUS, RECORDS_LIST_SORT_BY,
     RECORDS_LIST_UPDATE,
     UPDATE_LIST,
 } from "../actions/actionTypes";
@@ -29,6 +29,8 @@ const initialState = {
     searchQuery: "",
     selectedType: "book",
     selectedStatus: null,
+    userID: null,
+    sortKey: "status",
 };
 
 export const recordsReducer = (state = initialState, action) => {
@@ -48,7 +50,7 @@ export const recordsReducer = (state = initialState, action) => {
             if (item.id === id) {
                 return {
                     ...item,
-                    status: status === "complete" ? "incomplete" : "complete"
+                    status: status === "complete" ? "incomplete" : "complete",
                 };
             }
             return item;
@@ -66,7 +68,7 @@ export const recordsReducer = (state = initialState, action) => {
                 ...state,
                 newRecord: {
                     ...state.newRecord,
-                    [key]: value
+                    [key]: value,
                 },
             };
         }
@@ -153,6 +155,19 @@ export const recordsReducer = (state = initialState, action) => {
         return {
             ...state,
             selectedStatus: status,
+        };
+    }
+    case LOGIN: {
+        const { id } = action.payload;
+        return {
+            ...state,
+            userID: id,
+        };
+    }
+    case RECORDS_LIST_SORT_BY: {
+        return {
+            ...state,
+            sortKey: action.payload.key,
         };
     }
     default:

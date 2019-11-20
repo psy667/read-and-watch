@@ -2,6 +2,7 @@ import {
     FORM_CLOSE,
     FORM_OPEN,
     LOADING_SET,
+    LOGIN,
     RECORD_CREATE,
     RECORD_CREATE_SET_VALUE,
     RECORD_DELETE,
@@ -10,13 +11,14 @@ import {
     RECORDS_LIST_FILTER_BY_TYPE,
     RECORDS_LIST_SEARCH,
     RECORDS_LIST_SET_STATUS,
+    RECORDS_LIST_SORT_BY,
     RECORDS_LIST_UPDATE,
     TAGS_LIST_UPDATE,
     UPDATE_LIST,
 } from "./actionTypes";
 
 import {
-    addRecord, addTag, deleteRecord, getRecords, getTags, updateRecord,
+    addRecord, addTag, deleteRecord, updateRecord,
 } from "../database";
 
 export const toggleStatusAction = (record) => ({
@@ -129,23 +131,24 @@ export const addRecordAsyncAction = (record) => async (dispatch) => {
 
 
 export const updateStoreAsyncAction = (counter = 0) => async (dispatch) => {
-    dispatch(setLoading(true));
-    getRecords()
-        .then((data) => dispatch(setNewRecordsListAction(data)))
-        .catch((e) => {
-            // eslint-disable-next-line no-console
-            console.log(e.message);
-            if (counter < 10) {
-                setTimeout(() => dispatch(updateStoreAsyncAction(counter + 1)), 1000);
-            }
-        });
-    getTags()
-        .then((data) => dispatch(setNewTagsListAction(data)))
-        .catch(() => {
-            if (counter < 10) {
-                setTimeout(() => dispatch(updateStoreAsyncAction(counter + 1)), 1000);
-            }
-        });
+
+    // dispatch(setLoading(true));
+    // getRecords()
+    //     .then((data) => dispatch(setNewRecordsListAction(data)))
+    //     .catch((e) => {
+    //         // eslint-disable-next-line no-console
+    //         console.log(e.message);
+    //         if (counter < 10) {
+    //             setTimeout(() => dispatch(updateStoreAsyncAction(counter + 1)), 1000);
+    //         }
+    //     });
+    // getTags()
+    //     .then((data) => dispatch(setNewTagsListAction(data)))
+    //     .catch(() => {
+    //         if (counter < 10) {
+    //             setTimeout(() => dispatch(updateStoreAsyncAction(counter + 1)), 1000);
+    //         }
+    //     });
 };
 
 export const deleteRecordAsyncAction = (id) => async (dispatch) => {
@@ -167,3 +170,17 @@ export const toggleRecordStatusAsyncAction = (record) => async (dispatch) => {
             dispatch(updateListAction());
         });
 };
+
+export const loginAction = (id) => ({
+    type: LOGIN,
+    payload: {
+        id,
+    },
+});
+
+export const sortByAction = (key) => ({
+    type: RECORDS_LIST_SORT_BY,
+    payload: {
+        key,
+    },
+});

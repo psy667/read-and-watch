@@ -8,7 +8,6 @@
   display: flex;
   flex-wrap: wrap;
   align-content: flex-start;
-
   .record {
     width: 100%;
     //margin: 5px;
@@ -34,4 +33,20 @@
   .records-list-progress {
 
   }
+  .sort{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 16px;
+    font-size: 16px;
+
+    .counter{
+    }
+  }
+
+}
+button.link{
+  background: 0;
+  border: 0;
+  padding: 0;
 }
