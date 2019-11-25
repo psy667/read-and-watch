@@ -60,13 +60,15 @@
 
   .tabs {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     color: #fff9;
     margin-top: 8px;
-    padding: 4px 8px;
+    padding: 4px 0px;
+    overflow-x: scroll;
 
     div {
-      padding: 4px 8px;
+      padding: 4px 12px;
+      min-width: 80px;
       flex: 1;
       text-align: center;
     }

@@ -2,9 +2,9 @@ import React from "react";
 import {
     Button, List, PageHeader, Switch,
 } from "antd";
+import { useHistory } from "react-router";
 import { auth } from "../../firebase";
 import "./styles.scss";
-import { useHistory } from "react-router";
 
 export function Profile() {
     const history = useHistory();
@@ -14,9 +14,11 @@ export function Profile() {
     };
 
     const handleLogout = () => {
-        auth().signOut().then((r) => {
-            history.push("/login");
-        });
+        auth()
+            .signOut()
+            .then((r) => {
+                history.push("/login");
+            });
     };
 
     const { photoURL, displayName } = auth().currentUser || {};
@@ -88,7 +90,10 @@ export function Profile() {
                     </List.Item>
                 )}
             />
-            ,
+            <div className="version">
+                v
+                {process.env.REACT_APP_VERSION}
+            </div>
         </div>
     );
 }

@@ -1,12 +1,10 @@
 import React from "react";
-import {
-    Button, List, PageHeader, Result, Switch,
-} from "antd";
-import { auth, authGoogle } from "../../firebase";
-import "./styles.scss";
+import { Result } from "antd";
 import { useHistory } from "react-router";
-import Icon from "./icon.png";
 import firebase from "firebase";
+import { auth } from "../../firebase";
+import "./styles.scss";
+import Icon from "./icon.png";
 
 export function Login() {
     const history = useHistory();
@@ -48,7 +46,12 @@ export function Login() {
                 title="Read & Watch"
                 subTitle="Welcome!"
                 icon={<img className="logo" src={Icon} alt="logo" />}
-                extra={<button className="button-google" onClick={handleAuthGoogle}>Auth with Google</button>}
+                extra={(
+                    <button className="button-google" onClick={handleAuthGoogle}>
+Auth with
+                    Google
+                    </button>
+                )}
             />
         </div>
     );
