@@ -1,5 +1,9 @@
 import { auth, db } from "./firebase";
-import { setNewRecordsListAction, setNewTagsListAction } from "./actions/actions";
+import {
+    setNewRecordsListAction,
+    setNewTagsListAction,
+    setNewTypesListAction,
+} from "./actions/actions";
 import { store } from "./store";
 
 let userId = null;
@@ -48,6 +52,23 @@ export function tagsSaga(userID) {
         }));
 }
 
+export function typesSaga(userID) {
+    return new Promise((resolve) => db.collection("users")
+        .doc(userID)
+        .collection("user_types")
+        .onSnapshot((response) => {
+            const result = [];
+
+            response.forEach((item) => result.push({
+                ...item.data(),
+                id: item.id,
+            }));
+
+            resolve(result);
+            store.dispatch(setNewTypesListAction(result));
+        }));
+}
+
 export const deleteRecord = async (id) => db.collection("users")
     .doc(userId)
     .collection("records")
@@ -84,6 +105,28 @@ export const addTag = async (tag) => db.collection("users")
     .collection("tags")
     .doc(tag.id)
     .set(tag);
+
+export const getTypes = async () => {
+    if (!userId) {
+        throw Error("no auth");
+    }
+
+    return db
+        .collection("users")
+        .doc(userId)
+        .collection("user_types")
+        .get()
+        .then((response) => {
+            const typesArray = [];
+
+            response.forEach((item) => typesArray.push({
+                ...item.data(),
+                id: item.id,
+            }));
+
+            return typesArray;
+        });
+};
 
 // export const getRecords = async () => {
 //     if (!userId) {

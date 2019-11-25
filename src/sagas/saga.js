@@ -5,7 +5,9 @@ import {
     setNewRecordsListAction,
     setNewTagsListAction,
 } from "../actions/actions";
-import { login, recordsSaga, tagsSaga } from "../database";
+import {
+    login, recordsSaga, tagsSaga, typesSaga,
+} from "../database";
 
 function* initSaga() {
     const userId = yield login();
@@ -13,6 +15,9 @@ function* initSaga() {
 
     const recordsList = yield recordsSaga(userId);
     yield put(setNewRecordsListAction(recordsList));
+
+
+    yield typesSaga(userId);
 
     const tagsList = yield tagsSaga(userId);
     yield put(setNewTagsListAction(tagsList));

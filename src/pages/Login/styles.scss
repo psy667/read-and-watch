@@ -1,0 +1,24 @@
+@import "../../vars";
+
+
+.ant-result-icon{
+  max-width: 100%;
+  .logo{
+    width: 20vh;
+  }
+}
+button.button-google{
+  height: 40px;
+  padding-left: 66px;
+  padding-right: 36px;
+  background: url("./google.svg") no-repeat 16px 50%;
+  border: 1px solid #c6c6c6;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px -2px #999;
+  &:active{
+    box-shadow: none;
+  }
+  &:focus{
+    outline: 0;
+  }
+}

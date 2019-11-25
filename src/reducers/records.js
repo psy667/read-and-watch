@@ -30,7 +30,7 @@ const initialState = {
     selectedType: "book",
     selectedStatus: null,
     userID: null,
-    sortKey: "status",
+    sortKey: "date",
 };
 
 export const recordsReducer = (state = initialState, action) => {

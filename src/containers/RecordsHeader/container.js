@@ -9,6 +9,7 @@ import Avatar from "antd/es/avatar";
 import Progress from "antd/es/progress";
 import Search from "antd/es/input/Search";
 
+import { Link } from "react-router-dom";
 import { filterByStatusAction, filterByTypeAction, searchAction } from "../../actions/actions";
 import { auth } from "../../firebase";
 
@@ -29,18 +30,18 @@ const RecordsHeader = (props) => {
 
     return (
         <div className={cx("records-header", { "show-form": showForm })}>
-            <Progress
-                percent={100}
-                size="small"
-                status={loading ? "active" : "normal"}
-                showInfo={false}
-            />
+            {/* <Progress */}
+            {/*    percent={100} */}
+            {/*    size="small" */}
+            {/*    status={loading ? "active" : "normal"} */}
+            {/*    showInfo={false} */}
+            {/* /> */}
 
             <div className="wrapper">
                 <Search placeholder="Search by title or tags" allowClear onChange={handleInput} value={searchQuery} />
-                <Tooltip title={displayName} placement="bottomRight">
+                <Link to="/user/1" title={displayName} placement="bottomRight">
                     <Avatar src={photoURL} />
-                </Tooltip>
+                </Link>
             </div>
             <div className="tabs">
                 <div

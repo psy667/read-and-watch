@@ -14,26 +14,28 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
-firebase.auth()
-    .onAuthStateChanged((user) => {
-        if (user) {
-            // User is signed in.
-        } else {
-            firebase.auth()
-                .setPersistence(firebase.auth.Auth.Persistence.LOCAL)
-                .then(() => {
-                    const provider = new firebase.auth.GoogleAuthProvider();
+export function authGoogle() {
+    return firebase.auth()
+        .onAuthStateChanged((user) => {
+            if (user) {
+                // User is signed in.
+            } else {
+                firebase.auth()
+                    .setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+                    .then(() => {
+                        const provider = new firebase.auth.GoogleAuthProvider();
 
-                    return firebase.auth()
-                        .signInWithPopup(provider);
-                })
-                .catch((error) => {
-                    const errorMessage = error.message;
-                    // eslint-disable-next-line no-console
-                    console.dir(errorMessage);
-                });
-        }
-    });
+                        return firebase.auth()
+                            .signInWithPopup(provider);
+                    })
+                    .catch((error) => {
+                        const errorMessage = error.message;
+                        // eslint-disable-next-line no-console
+                        console.dir(errorMessage);
+                    });
+            }
+        });
+}
 
 
 firebase.firestore()

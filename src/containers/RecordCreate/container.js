@@ -88,7 +88,7 @@ const RecordCreate = (props) => {
                                 className="delete-button"
                                 type="normal"
                                 shape="circle"
-                                icon={<span className="icon-delete"/>}
+                                icon={<span className="icon-delete" />}
                                 size="small"
                                 onClick={() => handleDeleteRecord(newRecord.id)}
                             />
@@ -108,14 +108,20 @@ const RecordCreate = (props) => {
                             onChange={(event) => setValueNewRecord("description", event.target.value)}
                         />
 
-                        <InputTags value={newRecord.tags}
-                                   onChange={(value) => setValueNewRecord("tags", value)}>
+                        <InputTags
+                            value={newRecord.tags}
+                            onChange={(value) => setValueNewRecord("tags", value)}
+                        >
                             {tags}
                         </InputTags>
                     </div>
 
-                    <button className="button-save" type="primary" htmltype="submit"
-                            disabled={!newRecord.title}>
+                    <button
+                        className="button-save"
+                        type="primary"
+                        htmltype="submit"
+                        disabled={!newRecord.title}
+                    >
                         {"Save "}
                         {newRecord.type}
                     </button>

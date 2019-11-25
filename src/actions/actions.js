@@ -13,7 +13,7 @@ import {
     RECORDS_LIST_SET_STATUS,
     RECORDS_LIST_SORT_BY,
     RECORDS_LIST_UPDATE,
-    TAGS_LIST_UPDATE,
+    TAGS_LIST_UPDATE, TYPES_LIST_UPDATE,
     UPDATE_LIST,
 } from "./actionTypes";
 
@@ -77,6 +77,13 @@ export const setNewTagsListAction = (tags) => ({
     type: TAGS_LIST_UPDATE,
     payload: {
         tags,
+    },
+});
+
+export const setNewTypesListAction = (types) => ({
+    type: TYPES_LIST_UPDATE,
+    payload: {
+        types,
     },
 });
 
