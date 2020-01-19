@@ -81,3 +81,9 @@
     }
   }
 }
+
+@media (min-width: 500px) {
+  .records-header .tabs{
+    overflow-x: hidden;
+  }
+}

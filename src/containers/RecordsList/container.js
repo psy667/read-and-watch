@@ -3,18 +3,20 @@ import cx from "classnames";
 import { connect, useDispatch, useSelector } from "react-redux";
 import Empty from "antd/es/empty";
 
-import { Record } from "../../components/Record/component";
 
-import {
-    deleteRecordAsyncAction,
-    editRecordAction, sortByAction,
-    toggleRecordStatusAsyncAction,
-} from "../../actions/actions";
 import "./styles.scss";
 
-import { filter, sort } from "../../selectors/records";
 import { Dropdown } from "antd";
 import Menu from "antd/es/menu";
+import Tag from "antd/es/tag";
+import Card from "antd/es/card";
+import { filter, sort } from "../../selectors/records";
+import {
+    deleteRecordAsyncAction,
+    editRecordAction, searchAction, sortByAction,
+    toggleRecordStatusAsyncAction,
+} from "../../actions/actions";
+import { Record } from "../../components/Record/component";
 
 
 const RecordsList = (props) => {
@@ -66,6 +68,29 @@ const RecordsList = (props) => {
         </Menu>
     );
 
+    const handleSelectTag = (value) => {
+        dispatch(searchAction(value));
+    };
+
+    const tagsArr = [];
+    records.forEach((item) => item.tags.forEach((tag) => tagsArr.push(tag)));
+
+    const frequency = {};
+
+    tagsArr.forEach((item) => {
+        frequency[item] = frequency[item] ? frequency[item] + 1 : 1;
+    });
+
+    const a = Object.entries(frequency)
+        .map(([key, fr]) => ({
+            key,
+            fr,
+        }));
+
+    a.sort((a, b) => b.fr - a.fr);
+
+
+    const tags = a.slice(0, 4).map((item) => item.key);
 
     return (
         <div className={cx("record-list", { "show-form": showForm })}>
@@ -73,7 +98,7 @@ const RecordsList = (props) => {
                 <div className="counter">
                     <b>{records.length}</b>
                     {" "}
-records
+                    records
 
                 </div>
                 <Dropdown overlay={menu}>
@@ -85,6 +110,18 @@ records
                         </button>
                     </span>
                 </Dropdown>
+            </div>
+            <div className="tags">
+                {
+                    tags.map((item) => (
+                        <Tag
+                            key={item}
+                            onClick={() => handleSelectTag(item)}
+                        >
+                            {item}
+                        </Tag>
+                    ))
+                }
             </div>
             {
                 records.map((item) => (

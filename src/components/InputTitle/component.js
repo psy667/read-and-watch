@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import "./styles.scss";
 import axios from "axios";
+import Search from "antd/es/input/Search";
 
 
 export const InputTitle = (props) => {
@@ -12,6 +13,7 @@ export const InputTitle = (props) => {
     } = props;
 
     const [inputValue, setInputValue] = useState("");
+    const [loading, setLoader] = useState(false);
 
     useEffect(() => setInputValue(value), [value]);
 
@@ -32,36 +34,38 @@ export const InputTitle = (props) => {
         };
     };
 
-    function handleInput(e) {
+    const handleInput = async (e) => {
         const query = e.target ? e.target.value : e;
-
         setInputValue(query);
-    }
-
-    const handleBlur = async (e) => {
-        const query = e.target ? e.target.value : e;
 
         const { titleValue, titleType } = validateLink(query);
 
-        console.log(titleValue, titleType);
-
         if (titleType === "link") {
-            const responseRaw = await axios.get("/api/pageTitle", { params: { url: titleValue } });
-            const { title } = responseRaw.data;
-            onChangeTitle(title);
-            onChangeDescription(titleValue);
+            setLoader(true);
+            try {
+                const responseRaw = await axios.get("/api/pageTitle", { params: { url: titleValue } });
+                const { title } = responseRaw.data;
+                onChangeTitle(title);
+                onChangeDescription(titleValue);
+            } catch (e) {
+                console.log(e);
+            } finally {
+                setLoader(false);
+            }
         } else {
             onChangeTitle(titleValue);
         }
     };
 
     return (
-        <input
+        <Search
+            loading={loading}
             className="title"
             value={inputValue}
+            size="large"
             placeholder="Add title or link"
             onChange={(e) => handleInput(e)}
-            onBlur={(e) => handleBlur(e)}
+            onBlur={(e) => handleInput(e)}
         />
 
     );

@@ -1,5 +1,7 @@
+@import "../../vars";
+
 .record-list {
-  background: #E6E8F1;
+  background: $backgroundSecondary;
   //padding: 10px;
   overflow: scroll;
   overflow-x: hidden;
@@ -8,18 +10,22 @@
   display: flex;
   flex-wrap: wrap;
   align-content: flex-start;
+  .tags{
+    overflow: hidden;
+    overflow-x: scroll;
+  }
   .record {
     width: 100%;
     //margin: 5px;
-    @media(min-width: 700px) {
-      width: calc(50% - 10px);
-    }
-    @media(min-width: 1500px) {
-      width: calc(33.3% - 10px);
-    }
-    @media(min-width: 1900px) {
-      width: calc(25% - 10px);
-    }
+    //@media(min-width: 700px) {
+    //  width: calc(50% - 10px);
+    //}
+    //@media(min-width: 1500px) {
+    //  width: calc(33.3% - 10px);
+    //}
+    //@media(min-width: 1900px) {
+    //  width: calc(25% - 10px);
+    //}
 
     &:last-child {
       margin-bottom: 60px;

@@ -3,11 +3,11 @@ import React from "react";
 import { connect } from "react-redux";
 
 import "./styles.scss";
-import Button from "antd/es/button";
 
 import { Modal } from "antd";
 import Form from "antd/es/form";
 import Drawer from "antd/es/drawer";
+import TextArea from "antd/es/input/TextArea";
 import { InputTags } from "../../components/InputTags/component";
 import { InputTitle } from "../../components/InputTitle/component";
 import {
@@ -73,7 +73,7 @@ const RecordCreate = (props) => {
             <Drawer
                 title={formMode === "edit" ? "Edit record" : `Add new ${newRecord.type}`}
                 placement="bottom"
-                height={220}
+                height={300}
                 width={500}
                 visible={showForm}
                 onClose={closeForm}
@@ -83,16 +83,6 @@ const RecordCreate = (props) => {
                     form={form}
                 >
                     <div className="items">
-                        {newRecord.id && (
-                            <Button
-                                className="delete-button"
-                                type="normal"
-                                shape="circle"
-                                icon={<span className="icon-delete" />}
-                                size="small"
-                                onClick={() => handleDeleteRecord(newRecord.id)}
-                            />
-                        )}
 
                         <InputTitle
                             value={newRecord.title}
@@ -101,9 +91,10 @@ const RecordCreate = (props) => {
                             onChangeDescription={(value) => setValueNewRecord("description", value)}
                         />
 
-                        <textarea
+                        <TextArea
                             className="description"
                             placeholder="Add details"
+                            autoSize={{ minRows: 3, maxRows: 3 }}
                             value={newRecord.description}
                             onChange={(event) => setValueNewRecord("description", event.target.value)}
                         />
@@ -125,6 +116,17 @@ const RecordCreate = (props) => {
                         {"Save "}
                         {newRecord.type}
                     </button>
+
+                    {newRecord.id && (
+                        <button
+                            className="button-delete"
+                            type="primary"
+                            // disabled={!newRecord.title}
+                            onClick={() => handleDeleteRecord(newRecord.id)}
+                        >
+Delete
+                        </button>
+                    )}
                 </Form>
             </Drawer>
         </div>

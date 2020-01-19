@@ -1,8 +1,8 @@
 @import '~antd/dist/antd.css';
-
+@import "vars";
 .app {
   display: flex;
   flex-direction: column;
   height: 100vh;
-  background-color: #E6E8F1;
+  background-color: $backgroundSecondary;
 }
