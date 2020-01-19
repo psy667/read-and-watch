@@ -13,6 +13,8 @@
   .tags{
     overflow: hidden;
     overflow-x: scroll;
+    margin: 4px;
+    display: flex;
   }
   .record {
     width: 100%;
