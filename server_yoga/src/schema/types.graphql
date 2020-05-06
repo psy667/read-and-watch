@@ -93,4 +93,23 @@ type Group{
 
 type User{
     id: ID!
+    email: String
+    name: String
+    premium: Boolean
+    books: [Book]
+    movies: [Movie]
+    tvShows: [TVShow]
+    articles: [Article]
+    tags: [Tag]
+    createdAt: Date
 }
+
+type AuthResponse {
+    token: String
+    name: String
+}
+
+input AuthInput {
+    accessToken: String!
+}
+
