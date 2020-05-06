@@ -1,0 +1,96 @@
+interface Item{
+    id: ID!
+    title: String!
+    tags: [Tag]
+    status: Status
+    startDate: Date
+    endDate: Date
+    rating: Int
+    comment: String
+    poster: URL
+    group: Group
+}
+
+scalar URL
+
+scalar Date
+
+enum Status{
+    NOT_STARTED
+    STARTED
+    COMPLETED
+}
+
+type Book implements Item{
+    id: ID!
+    title: String!
+    tags: [Tag]
+    status: Status
+    startDate: Date
+    endDate: Date
+    rating: Int
+    comment: String
+    poster: URL
+    description: String
+    group: Group
+    author: String
+    currentPage: Int
+}
+
+type Movie implements Item{
+    id: ID!
+    title: String!
+    tags: [Tag]
+    status: Status
+    startDate: Date
+    endDate: Date
+    rating: Int
+    comment: String
+    director: String
+    poster: URL
+    group: Group
+}
+
+type TVShow implements Item{
+    id: ID!
+    title: String!
+    tags: [Tag]
+    status: Status
+    startDate: Date
+    endDate: Date
+    rating: Int
+    comment: String
+    director: String
+    poster: URL
+    group: Group
+    currentEpisode: Int
+    currentSeason: Int
+}
+
+type Article implements Item{
+    id: ID!
+    title: String!
+    tags: [Tag]
+    status: Status
+    startDate: Date
+    endDate: Date
+    rating: Int
+    comment: String
+    poster: URL
+    group: Group
+    link: URL!
+}
+
+type Tag{
+    id: ID!
+    title: String!
+}
+
+type Group{
+    id: ID!
+    title: String!
+}
+
+type User{
+    id: ID!
+}

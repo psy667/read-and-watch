@@ -1,9 +1,16 @@
-import { makeSchema } from "@nexus/schema";
-import { nexusPrismaPlugin } from "nexus-prisma";
+import {makeExecutableSchema} from "graphql-tools";
+import {importSchema} from "graphql-import";
+import {Mutation} from "./mutation";
+import {Query} from "./query";
 
-makeSchema({
-    types: [],
-    // ...
-    plugin: [nexusPrismaPlugin()]
-});
+const resolvers = {
+  Query,
+  Mutation
 
+}
+const typeDefs = importSchema("src/schema/schema.graphql");
+
+export const schema = makeExecutableSchema({
+    resolvers,
+    typeDefs
+})

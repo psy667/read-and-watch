@@ -1,0 +1,18 @@
+#import * from 'types.graphql'
+
+type Query{
+    books: [Book]
+    movies: [Movie]
+    tvShows: [TVShow]
+    articles: [Article]
+    tags: [Tag]
+}
+
+type Mutation {
+    addBook: Book
+}
+
+schema{
+    query: Query
+    mutation: Mutation
+}
