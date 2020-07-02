@@ -1,0 +1,14 @@
+input BookInput {
+    title: String!
+    tags: [ID]
+    status: Status
+    startDate: Date
+    endDate: Date
+    rating: Int
+    comment: String
+    poster: URL
+    description: String
+    group: ID
+    author: String
+    currentPage: Int
+}

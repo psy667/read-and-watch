@@ -1,0 +1,11 @@
+query getBooks {
+    books{
+        ...BookListFragment
+    }
+}
+
+query getBook($bookID: ID!) {
+    book(id: $bookID) {
+        ...BookFullFragment
+    }
+}

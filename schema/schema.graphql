@@ -1,7 +1,10 @@
 #import * from 'types.graphql'
+#import * from 'input.graphql'
 
 type Query{
     books: [Book]
+    book(id: ID!): Book
+
     movies: [Movie]
     tvShows: [TVShow]
     articles: [Article]
@@ -10,7 +13,9 @@ type Query{
 
 type Mutation {
     authGoogle(input: AuthInput!): AuthResponse
-    addBook: Book
+    signUp(email: String): User
+
+    addBook(input: BookInput): Book
 }
 
 schema{

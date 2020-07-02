@@ -2,7 +2,6 @@ import {authenticateGoogle} from "./google-auth";
 
 export const Mutation = {
     authGoogle: async (_, { input: { accessToken } }, context) => {
-        // console.log(context)
         const {request,response} = context
         request.body = {
             ...request.body,
@@ -16,33 +15,23 @@ export const Mutation = {
             name: data.profile.displayName,
             token: data.profile.id
         })
-        // try {
-        //     // data contains the accessToken, refreshToken and profile from passport
-        //     const { data, info } = await authenticateGoogle(req, res);
-        //
-        //     if (data) {
-        //         const user = await User.upsertGoogleUser(data);
-        //
-        //         if (user) {
-        //             return ({
-        //                 name: user.name,
-        //                 token: user.generateJWT(),
-        //             });
-        //         }
-        //     }
-        //
-        //     if (info) {
-        //         console.log(info);
-        //         switch (info.code) {
-        //             case 'ETIMEDOUT':
-        //                 return (new Error('Failed to reach Google: Try Again'));
-        //             default:
-        //                 return (new Error('something went wrong'));
-        //         }
-        //     }
-        //     return (Error('server error'));
-        // } catch (error) {
-        //     return error;
-        // }
     },
+    signUp: async (_, input, ctx) => {
+      const result = await ctx.prisma.user.create({data: {email: input.email, name: "Test"}});
+      console.log(result);
+    },
+    addBook: async (_, input, ctx) => {
+        const {title} = input;
+
+        console.time('addBook');
+        const result = await ctx.prisma.book.create({data:
+                {
+                    title,
+                    user: {connect: {id: 1}}
+                },
+        });
+        console.timeEnd('addBook');
+        console.log(result);
+
+    }
 }

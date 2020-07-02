@@ -1,0 +1,34 @@
+fragment BookFullFragment on Book {
+    id
+    title
+    tags {
+        id
+        title
+    }
+    status
+    startDate
+    endDate
+    rating
+    comment
+    poster
+    description
+    author
+    currentPage
+}
+
+fragment BookListFragment on Book {
+    id
+    title
+    author
+    tags {
+        id
+        title
+    }
+    status
+    rating
+    poster
+    group {
+        id
+    }
+
+}

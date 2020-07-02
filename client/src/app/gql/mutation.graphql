@@ -1,0 +1,7 @@
+mutation addBook(
+    $input: BookInput!
+) {
+    addBook(input: $input) {
+        ...BookFullFragment
+    }
+}
