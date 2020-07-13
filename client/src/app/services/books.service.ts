@@ -20,15 +20,15 @@ export class BooksService {
       protected getBooksGQL: GetBooksGQL,
   ) { }
 
-  public getBooksList(): Observable<BookListFragmentFragment[]> {
+  public getBooksList(): Observable<any> {
     return this.getBooksGQL.watch().valueChanges;
   }
 
-  public getBook(id: string): Observable<BookFullFragmentFragment> {
+  public getBook(id: string): Observable<any> {
     return this.getBookGQL.watch({bookID: id}).valueChanges;
   }
 
-  public createBook(bookInput: BookInput): Observable<BookFullFragmentFragment> {
+  public createBook(bookInput: BookInput): Observable<any> {
     return this.addBookGQL.mutate({input: bookInput});
   }
 }

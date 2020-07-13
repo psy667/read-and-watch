@@ -8,6 +8,7 @@ import { ItemComponent } from '@src/app/components/item/item.component';
 import { ListComponent } from '@src/app/pages/list/list.component';
 import {CommonModule} from "@angular/common";
 import { BookItemComponent } from '@src/app/components/book-item/book-item.component';
+import { BooksPageComponent } from '@src/app/pages/books-page/books-page.component';
 
 
 // Uncomment and add to NgModule imports if you need to use two-way binding
@@ -23,6 +24,7 @@ import { BookItemComponent } from '@src/app/components/book-item/book-item.compo
     ItemComponent,
     ListComponent,
     BookItemComponent,
+    BooksPageComponent,
   ],
     imports: [
         NativeScriptModule,

@@ -9,21 +9,6 @@ import {Observable} from 'rxjs';
   styleUrls: ['./list.component.css']
 })
 export class ListComponent implements OnInit {
-  books$: Observable<BookListFragmentFragment[]>;
-  currentBook$: Observable<BookFullFragmentFragment>;
-
-  constructor(
-      protected booksService: BooksService
-  ) { }
-
   ngOnInit() {
-    this.books$ = this.booksService.getBooksList();
-  }
-  openBookItem(id) {
-    this.currentBook$ = this.booksService.getBook(id);
-  }
-
-  createBook(title) {
-    this.currentBook$ = this.booksService.createBook({title});
   }
 }

@@ -1,0 +1,14 @@
+<h2>Books</h2>
+<div class="wrapper">
+    <div class="list">
+        <div *ngFor="let book of books$ | async">
+            {{book.title}}
+
+            {{book.author}}
+        </div>
+    </div>
+    <div class="view" *ngIf="currentBook$ | async as currentBook">
+        <b>ID: </b> {{currentBook.id}}
+        <b>Title: </b> {{currentBook.title}}
+    </div>
+</div>
