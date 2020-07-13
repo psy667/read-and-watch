@@ -7,5 +7,11 @@
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
       <jdbc-url>jdbc:postgresql://ec2-54-217-204-34.eu-west-1.compute.amazonaws.com:5432/da8stmlfcjat24</jdbc-url>
     </data-source>
+    <data-source source="LOCAL" name="read-and-watch@127.0.0.1" uuid="79d3352f-35d9-4447-aa02-aa05d481d0fd">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://127.0.0.1:5432/read-and-watch</jdbc-url>
+    </data-source>
   </component>
 </project>

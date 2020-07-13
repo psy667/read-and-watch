@@ -20,10 +20,9 @@ export const Mutation = {
       const result = await ctx.prisma.user.create({data: {email: input.email, name: "Test"}});
       console.log(result);
     },
-    addBook: async (_, input, ctx) => {
+    addBook: async (_, {input}, ctx) => {
         const {title} = input;
-
-        console.time('addBook');
+        console.time('addBook',);
         const result = await ctx.prisma.book.create({data:
                 {
                     title,
@@ -31,7 +30,6 @@ export const Mutation = {
                 },
         });
         console.timeEnd('addBook');
-        console.log(result);
-
+        return result;
     }
 }
