@@ -1,2 +1,4 @@
 /server_yoga/prisma/.env
 /server_yoga/.env
+/server_yoga/node_modules/
+/server_yoga/prisma/node_modules/

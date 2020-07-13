@@ -1,0 +1,127 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+	provider = "postgresql"
+	url = "***"
+}
+
+generator client {
+	provider = "prisma-client-js"
+}
+
+model User {
+	id          Int         @id @default(autoincrement())
+    email       String      @unique
+    name        String
+    premium     Boolean     @default(false)
+    books       Book[]
+    movies      Movie[]
+    tvShows     TVShow[]
+    articles    Article[]
+    tags        Tag[]
+    createdAt   DateTime    @default(now())
+}
+
+model Book{
+    id          Int         @id @default(autoincrement())
+    title       String      
+    description String?
+    status      Status      @default(NOT_STARTED)
+    startDate   DateTime    @default(now())
+    endDate     DateTime?
+    rating      Float       @default(0.0)    
+    comment     String?
+    poster      String?
+    tags        Tag[]       @relation(references: [id])    
+    groupId     Int?       
+    group       Group?      @relation(fields: [groupId], references: [id])
+    userId      Int     
+    user        User        @relation(fields: [userId], references: [id])
+
+    author      String?
+    currentPage Int         @default(0)
+}
+
+model Movie{
+    id          Int         @id @default(autoincrement())
+    title       String    
+    description String?  
+    status      Status      @default(NOT_STARTED)
+    startDate   DateTime    @default(now())
+    endDate     DateTime?
+    rating      Float       @default(0.0)    
+    comment     String?
+    poster      String?
+    tags        Tag[]       @relation(references: [id])    
+    groupId     Int?       
+    group       Group?      @relation(fields: [groupId], references: [id])
+    userId      Int     
+    user        User        @relation(fields: [userId], references: [id])
+
+    director    String?
+}
+
+model TVShow{
+    id          Int         @id @default(autoincrement())
+    title       String      
+    description String?
+    status      Status      @default(NOT_STARTED)
+    startDate   DateTime    @default(now())
+    endDate     DateTime?
+    rating      Float       @default(0.0)    
+    comment     String?
+    poster      String?
+    tags        Tag[]       @relation(references: [id])    
+    groupId     Int?       
+    group       Group?      @relation(fields: [groupId], references: [id])
+    userId      Int     
+    user        User        @relation(fields: [userId], references: [id])
+
+    director        String?
+    currentEpisode  Int     @default(0)
+    currentSeason   Int     @default(0)
+}
+
+model Article{
+    id          Int         @id @default(autoincrement())
+    title       String      
+    description String?
+    status      Status      @default(NOT_STARTED)
+    startDate   DateTime    @default(now())
+    endDate     DateTime?
+    rating      Float       @default(0.0)    
+    comment     String?
+    poster      String?
+    tags        Tag[]       @relation(references: [id])    
+    groupId     Int?       
+    group       Group?      @relation(fields: [groupId], references: [id])
+    userId      Int     
+    user        User        @relation(fields: [userId], references: [id])
+
+    link        String
+}
+
+model Tag{
+    id          Int         @id @default(autoincrement())
+    title       String      
+    books       Book[]      @relation(references: [id])
+    movies      Movie[]     @relation(references: [id])
+    tvShows     TVShow[]    @relation(references: [id])
+    articles    Article[]   @relation(references: [id])
+}
+
+model Group{
+    id          Int     @id @default(autoincrement())
+    title       String      
+    books       Book[]      
+    movies      Movie[]     
+    tvShows     TVShow[]    
+    articles    Article[]
+}
+
+enum Status {
+    NOT_STARTED
+    STARTED
+    COMPLETED
+}
