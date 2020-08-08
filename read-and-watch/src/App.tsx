@@ -1,38 +1,48 @@
 import React, { useEffect, useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import {apollo} from "./index";
-import {gql} from "@apollo/client";
-import {BooksService} from "./services/books";
+import {gql, NetworkStatus, useLazyQuery, useQuery} from "@apollo/client";
 
-const booksService = new BooksService();
 
-class App extends React.Component<any, any> {
-    constructor(props) {
-        super(props);
+const GET_BOOKS = gql`
+    {
+        books {
+            id
+            title
+        }
+    }
+`;
 
-        this.state = {
-            books: []
-        };
+function App() {
+    // const { loading, error, data, refetch, networkStatus } = useQuery(GET_BOOKS);
+    const [getBooks, { loading, error, data }] = useLazyQuery(GET_BOOKS);
+    const [books, setBooks] = useState([]);
+
+    if (loading) return <p>Loading...</p>;
+    if (error) return <p>Error :(</p>;
+
+    if(data && data.books){
+        setBooks(data.books);
     }
 
-    componentDidMount() {
-        booksService.getBooks().subscribe(r => {
-            this.setState({books: r.data.books});
-        });
+    const handleLoad = () => {
+        getBooks()
     }
 
-    render(){
-        return <div className="App">
-                Books
-                {
-                    this.state.books.map(it =>
-                        <div key={it.id}> {it.title}</div>
-                    )
-                }
-            </div>
-    }
-
+    return (
+        <div>
+            <button onClick={() => handleLoad()}>Load!</button>
+            {
+                books.map(({ id, title }) => (
+                    <div key={id}>
+                        <p>
+                            {title}
+                        </p>
+                    </div>
+                ))
+            }
+        </div>
+    )
 }
 
 export default App;

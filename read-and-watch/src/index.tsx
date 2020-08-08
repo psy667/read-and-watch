@@ -4,8 +4,10 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-import { ApolloClient, HttpLink, InMemoryCache } from '@apollo/client';
-export const apollo = new ApolloClient({
+import {ApolloProvider, ApolloClient, HttpLink, InMemoryCache} from "@apollo/client";
+
+
+export const client = new ApolloClient({
     cache: new InMemoryCache(),
     link: new HttpLink({
         uri: 'http://localhost:4000',
@@ -14,7 +16,9 @@ export const apollo = new ApolloClient({
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+      <ApolloProvider client={client}>
+        <App />
+      </ApolloProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

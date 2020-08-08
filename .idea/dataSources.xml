@@ -1,17 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="read-and-watch" uuid="b919f7ed-5111-45a7-aa06-10b382a8f9ec">
+    <data-source source="LOCAL" name="da8stmlfcjat24@ec2-54-217-204-34.eu-west-1.compute.amazonaws.com" uuid="c5e4136a-c3bd-4bfe-a837-bc4eb43fb9ab">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
       <jdbc-url>jdbc:postgresql://ec2-54-217-204-34.eu-west-1.compute.amazonaws.com:5432/da8stmlfcjat24</jdbc-url>
-    </data-source>
-    <data-source source="LOCAL" name="read-and-watch@127.0.0.1" uuid="79d3352f-35d9-4447-aa02-aa05d481d0fd">
-      <driver-ref>postgresql</driver-ref>
-      <synchronize>true</synchronize>
-      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:postgresql://127.0.0.1:5432/read-and-watch</jdbc-url>
     </data-source>
   </component>
 </project>
